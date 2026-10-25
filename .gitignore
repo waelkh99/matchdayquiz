@@ -1,0 +1,7 @@
+node_modules
+dist
+*.log
+_flutter_old
+.playwright-mcp
+test-results
+playwright-report

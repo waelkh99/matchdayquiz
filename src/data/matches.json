@@ -1,0 +1,398 @@
+[
+  {
+    "id": "bar-mun-2009",
+    "comp": { "en": "Champions League Final", "ar": "نهائي دوري أبطال أوروبا" },
+    "date": "2009-05-27",
+    "venue": { "en": "Stadio Olimpico, Rome", "ar": "الملعب الأولمبي، روما" },
+    "score": "2–0",
+    "source": ["https://en.wikipedia.org/wiki/2009_UEFA_Champions_League_final"],
+    "home": {
+      "team": { "en": "Barcelona", "ar": "برشلونة" },
+      "formation": "4-3-3",
+      "kit": { "a": "#a50044", "b": "#004d98", "stripes": true, "num": "#ffffff" },
+      "rows": [
+        [{ "short": "Valdés", "name": "Víctor Valdés", "ar": "فالديس", "num": 1, "aliases": [] }],
+        [
+          { "short": "Sylvinho", "name": "Sylvinho", "ar": "سيلفينيو", "num": 16, "aliases": ["silvinho"] },
+          { "short": "Touré", "name": "Yaya Touré", "ar": "يايا توريه", "num": 24, "aliases": ["yaya", "toure", "توريه"] },
+          { "short": "Piqué", "name": "Gerard Piqué", "ar": "بيكيه", "num": 3, "aliases": [] },
+          { "short": "Puyol", "name": "Carles Puyol", "ar": "بويول", "num": 5, "aliases": [] }
+        ],
+        [
+          { "short": "Iniesta", "name": "Andrés Iniesta", "ar": "إنييستا", "num": 8, "aliases": ["انيستا"] },
+          { "short": "Busquets", "name": "Sergio Busquets", "ar": "بوسكيتس", "num": 28, "aliases": ["busi"] },
+          { "short": "Xavi", "name": "Xavi Hernández", "ar": "تشافي", "num": 6, "aliases": ["شافي", "تشابي"] }
+        ],
+        [
+          { "short": "Henry", "name": "Thierry Henry", "ar": "هنري", "num": 14, "aliases": ["titi"] },
+          { "short": "Messi", "name": "Lionel Messi", "ar": "ميسي", "num": 10, "aliases": ["leo"] },
+          { "short": "Eto'o", "name": "Samuel Eto'o", "ar": "إيتو", "num": 9, "aliases": ["eto", "ايتو"] }
+        ]
+      ]
+    },
+    "away": {
+      "team": { "en": "Man United", "ar": "مانشستر يونايتد" },
+      "formation": "4-3-3",
+      "kit": { "a": "#da291c", "b": "#da291c", "num": "#ffffff" },
+      "rows": [
+        [{ "short": "Van der Sar", "name": "Edwin van der Sar", "ar": "فان دير سار", "num": 1, "aliases": ["vds", "vandersar"] }],
+        [
+          { "short": "Evra", "name": "Patrice Evra", "ar": "إيفرا", "num": 3, "aliases": [] },
+          { "short": "Vidić", "name": "Nemanja Vidić", "ar": "فيديتش", "num": 15, "aliases": ["vidic"] },
+          { "short": "Ferdinand", "name": "Rio Ferdinand", "ar": "فرديناند", "num": 5, "aliases": ["rio"] },
+          { "short": "O'Shea", "name": "John O'Shea", "ar": "أوشي", "num": 22, "aliases": ["oshea"] }
+        ],
+        [
+          { "short": "Giggs", "name": "Ryan Giggs", "ar": "غيغز", "num": 11, "aliases": ["جيجز"] },
+          { "short": "Carrick", "name": "Michael Carrick", "ar": "كاريك", "num": 16, "aliases": [] },
+          { "short": "Anderson", "name": "Anderson", "ar": "أندرسون", "num": 8, "aliases": [] }
+        ],
+        [
+          { "short": "Rooney", "name": "Wayne Rooney", "ar": "روني", "num": 10, "aliases": [] },
+          { "short": "Ronaldo", "name": "Cristiano Ronaldo", "ar": "رونالدو", "num": 7, "aliases": ["cr7", "cristiano"] },
+          { "short": "Park", "name": "Park Ji-sung", "ar": "بارك جي سونغ", "num": 13, "aliases": ["jisung", "بارك"] }
+        ]
+      ]
+    }
+  },
+  {
+    "id": "mil-liv-2005",
+    "comp": { "en": "Champions League Final", "ar": "نهائي دوري أبطال أوروبا" },
+    "date": "2005-05-25",
+    "venue": { "en": "Atatürk Olympic Stadium, Istanbul", "ar": "ملعب أتاتورك الأولمبي، إسطنبول" },
+    "score": "3–3",
+    "note": { "en": "Liverpool won 3–2 on penalties", "ar": "فاز ليفربول 3–2 بركلات الترجيح" },
+    "source": ["https://en.wikipedia.org/wiki/2005_UEFA_Champions_League_final"],
+    "home": {
+      "team": { "en": "AC Milan", "ar": "ميلان" },
+      "formation": "4-3-1-2",
+      "kit": { "a": "#fb090b", "b": "#111111", "stripes": true, "num": "#ffffff" },
+      "rows": [
+        [{ "short": "Dida", "name": "Dida", "ar": "ديدا", "num": 1, "aliases": [] }],
+        [
+          { "short": "Maldini", "name": "Paolo Maldini", "ar": "مالديني", "num": 3, "aliases": [] },
+          { "short": "Nesta", "name": "Alessandro Nesta", "ar": "نيستا", "num": 13, "aliases": [] },
+          { "short": "Stam", "name": "Jaap Stam", "ar": "ستام", "num": 31, "aliases": [] },
+          { "short": "Cafu", "name": "Cafu", "ar": "كافو", "num": 2, "aliases": [] }
+        ],
+        [
+          { "short": "Seedorf", "name": "Clarence Seedorf", "ar": "سيدورف", "num": 20, "aliases": [] },
+          { "short": "Pirlo", "name": "Andrea Pirlo", "ar": "بيرلو", "num": 21, "aliases": [] },
+          { "short": "Gattuso", "name": "Gennaro Gattuso", "ar": "غاتوزو", "num": 8, "aliases": ["rino", "جاتوزو"] }
+        ],
+        [{ "short": "Kaká", "name": "Kaká", "ar": "كاكا", "num": 22, "aliases": ["kaka"] }],
+        [
+          { "short": "Shevchenko", "name": "Andriy Shevchenko", "ar": "شيفتشينكو", "num": 7, "aliases": ["sheva", "شيفا"] },
+          { "short": "Crespo", "name": "Hernán Crespo", "ar": "كريسبو", "num": 11, "aliases": [] }
+        ]
+      ]
+    },
+    "away": {
+      "team": { "en": "Liverpool", "ar": "ليفربول" },
+      "formation": "4-4-1-1",
+      "kit": { "a": "#c8102e", "b": "#c8102e", "num": "#ffffff" },
+      "rows": [
+        [{ "short": "Dudek", "name": "Jerzy Dudek", "ar": "دوديك", "num": 1, "aliases": [] }],
+        [
+          { "short": "Traoré", "name": "Djimi Traoré", "ar": "تراوري", "num": 21, "aliases": ["traore"] },
+          { "short": "Hyypiä", "name": "Sami Hyypiä", "ar": "هيبيا", "num": 4, "aliases": ["hypia"] },
+          { "short": "Carragher", "name": "Jamie Carragher", "ar": "كاراغر", "num": 23, "aliases": ["carra", "كاراجر"] },
+          { "short": "Finnan", "name": "Steve Finnan", "ar": "فينان", "num": 3, "aliases": [] }
+        ],
+        [
+          { "short": "Riise", "name": "John Arne Riise", "ar": "ريسه", "num": 6, "aliases": ["rise"] },
+          { "short": "Gerrard", "name": "Steven Gerrard", "ar": "جيرارد", "num": 8, "aliases": ["stevie g"] },
+          { "short": "Alonso", "name": "Xabi Alonso", "ar": "ألونسو", "num": 14, "aliases": ["xabi"] },
+          { "short": "L. García", "name": "Luis García", "ar": "لويس غارسيا", "num": 10, "aliases": ["garcia", "luis garcia"] }
+        ],
+        [{ "short": "Kewell", "name": "Harry Kewell", "ar": "كيويل", "num": 7, "aliases": [] }],
+        [{ "short": "Baroš", "name": "Milan Baroš", "ar": "باروش", "num": 5, "aliases": ["baros"] }]
+      ]
+    }
+  },
+  {
+    "id": "ned-esp-2010",
+    "comp": { "en": "World Cup Final", "ar": "نهائي كأس العالم" },
+    "date": "2010-07-11",
+    "venue": { "en": "Soccer City, Johannesburg", "ar": "سوكر سيتي، جوهانسبرغ" },
+    "score": "0–1",
+    "note": { "en": "After extra time", "ar": "بعد الأشواط الإضافية" },
+    "source": ["https://en.wikipedia.org/wiki/2010_FIFA_World_Cup_final"],
+    "home": {
+      "team": { "en": "Netherlands", "ar": "هولندا" },
+      "formation": "4-2-3-1",
+      "kit": { "a": "#f36c21", "b": "#f36c21", "num": "#111111" },
+      "rows": [
+        [{ "short": "Stekelenburg", "name": "Maarten Stekelenburg", "ar": "ستيكلنبرغ", "num": 1, "aliases": [] }],
+        [
+          { "short": "Van Bronckhorst", "name": "Giovanni van Bronckhorst", "ar": "فان برونكهورست", "num": 5, "aliases": ["gio", "vanbronckhorst"] },
+          { "short": "Mathijsen", "name": "Joris Mathijsen", "ar": "ماتيسن", "num": 4, "aliases": ["mathijssen"] },
+          { "short": "Heitinga", "name": "John Heitinga", "ar": "هايتينغا", "num": 3, "aliases": [] },
+          { "short": "Van der Wiel", "name": "Gregory van der Wiel", "ar": "فان دير فيل", "num": 2, "aliases": ["vanderwiel"] }
+        ],
+        [
+          { "short": "De Jong", "name": "Nigel de Jong", "ar": "دي يونغ", "num": 8, "aliases": ["dejong"] },
+          { "short": "Van Bommel", "name": "Mark van Bommel", "ar": "فان بوميل", "num": 6, "aliases": ["vanbommel"] }
+        ],
+        [
+          { "short": "Kuyt", "name": "Dirk Kuyt", "ar": "كاوت", "num": 7, "aliases": ["kuijt"] },
+          { "short": "Sneijder", "name": "Wesley Sneijder", "ar": "شنايدر", "num": 10, "aliases": ["sneider"] },
+          { "short": "Robben", "name": "Arjen Robben", "ar": "روبن", "num": 11, "aliases": [] }
+        ],
+        [{ "short": "Van Persie", "name": "Robin van Persie", "ar": "فان بيرسي", "num": 9, "aliases": ["rvp", "vanpersie"] }]
+      ]
+    },
+    "away": {
+      "team": { "en": "Spain", "ar": "إسبانيا" },
+      "formation": "4-2-3-1",
+      "kit": { "a": "#c60b1e", "b": "#c60b1e", "num": "#f1bf00" },
+      "rows": [
+        [{ "short": "Casillas", "name": "Iker Casillas", "ar": "كاسياس", "num": 1, "aliases": ["iker"] }],
+        [
+          { "short": "Capdevila", "name": "Joan Capdevila", "ar": "كابديفيا", "num": 11, "aliases": [] },
+          { "short": "Puyol", "name": "Carles Puyol", "ar": "بويول", "num": 5, "aliases": [] },
+          { "short": "Piqué", "name": "Gerard Piqué", "ar": "بيكيه", "num": 3, "aliases": [] },
+          { "short": "Ramos", "name": "Sergio Ramos", "ar": "راموس", "num": 15, "aliases": [] }
+        ],
+        [
+          { "short": "Alonso", "name": "Xabi Alonso", "ar": "ألونسو", "num": 14, "aliases": ["xabi"] },
+          { "short": "Busquets", "name": "Sergio Busquets", "ar": "بوسكيتس", "num": 16, "aliases": ["busi"] }
+        ],
+        [
+          { "short": "Iniesta", "name": "Andrés Iniesta", "ar": "إنييستا", "num": 6, "aliases": ["انيستا"] },
+          { "short": "Xavi", "name": "Xavi Hernández", "ar": "تشافي", "num": 8, "aliases": ["شافي", "تشابي"] },
+          { "short": "Pedro", "name": "Pedro Rodríguez", "ar": "بيدرو", "num": 18, "aliases": ["pedrito"] }
+        ],
+        [{ "short": "Villa", "name": "David Villa", "ar": "فيا", "num": 7, "aliases": ["فيّا"] }]
+      ]
+    }
+  },
+  {
+    "id": "mun-bay-1999",
+    "comp": { "en": "Champions League Final", "ar": "نهائي دوري أبطال أوروبا" },
+    "date": "1999-05-26",
+    "venue": { "en": "Camp Nou, Barcelona", "ar": "كامب نو، برشلونة" },
+    "score": "2–1",
+    "source": ["https://en.wikipedia.org/wiki/1999_UEFA_Champions_League_final"],
+    "home": {
+      "team": { "en": "Man United", "ar": "مانشستر يونايتد" },
+      "formation": "4-4-2",
+      "kit": { "a": "#da291c", "b": "#da291c", "num": "#ffffff" },
+      "rows": [
+        [{ "short": "Schmeichel", "name": "Peter Schmeichel", "ar": "شمايكل", "num": 1, "aliases": ["schmichel"] }],
+        [
+          { "short": "Irwin", "name": "Denis Irwin", "ar": "إيروين", "num": 3, "aliases": [] },
+          { "short": "Johnsen", "name": "Ronny Johnsen", "ar": "يونسن", "num": 5, "aliases": [] },
+          { "short": "Stam", "name": "Jaap Stam", "ar": "ستام", "num": 6, "aliases": [] },
+          { "short": "G. Neville", "name": "Gary Neville", "ar": "غاري نيفيل", "num": 2, "aliases": ["neville", "نيفيل"] }
+        ],
+        [
+          { "short": "Blomqvist", "name": "Jesper Blomqvist", "ar": "بلومكفيست", "num": 15, "aliases": ["blomkvist"] },
+          { "short": "Butt", "name": "Nicky Butt", "ar": "بات", "num": 8, "aliases": [] },
+          { "short": "Beckham", "name": "David Beckham", "ar": "بيكهام", "num": 7, "aliases": ["becks"] },
+          { "short": "Giggs", "name": "Ryan Giggs", "ar": "غيغز", "num": 11, "aliases": ["جيجز"] }
+        ],
+        [
+          { "short": "Yorke", "name": "Dwight Yorke", "ar": "يورك", "num": 19, "aliases": ["york"] },
+          { "short": "Cole", "name": "Andy Cole", "ar": "كول", "num": 9, "aliases": ["andrew cole"] }
+        ]
+      ]
+    },
+    "away": {
+      "team": { "en": "Bayern Munich", "ar": "بايرن ميونخ" },
+      "formation": "5-3-2",
+      "kit": { "a": "#dc052d", "b": "#dc052d", "num": "#ffffff" },
+      "rows": [
+        [{ "short": "Kahn", "name": "Oliver Kahn", "ar": "كان", "num": 1, "aliases": [] }],
+        [
+          { "short": "Tarnat", "name": "Michael Tarnat", "ar": "تارنات", "num": 18, "aliases": [] },
+          { "short": "Linke", "name": "Thomas Linke", "ar": "لينكه", "num": 25, "aliases": [] },
+          { "short": "Matthäus", "name": "Lothar Matthäus", "ar": "ماتيوس", "num": 10, "aliases": ["matthaus", "matthaeus"] },
+          { "short": "Kuffour", "name": "Samuel Kuffour", "ar": "كوفور", "num": 4, "aliases": [] },
+          { "short": "Babbel", "name": "Markus Babbel", "ar": "بابل", "num": 2, "aliases": [] }
+        ],
+        [
+          { "short": "Effenberg", "name": "Stefan Effenberg", "ar": "إيفنبرغ", "num": 11, "aliases": [] },
+          { "short": "Jeremies", "name": "Jens Jeremies", "ar": "يريميس", "num": 16, "aliases": [] },
+          { "short": "Basler", "name": "Mario Basler", "ar": "باسلر", "num": 14, "aliases": [] }
+        ],
+        [
+          { "short": "Zickler", "name": "Alexander Zickler", "ar": "تسيكلر", "num": 21, "aliases": [] },
+          { "short": "Jancker", "name": "Carsten Jancker", "ar": "يانكر", "num": 19, "aliases": [] }
+        ]
+      ]
+    }
+  },
+  {
+    "id": "bra-fra-1998",
+    "comp": { "en": "World Cup Final", "ar": "نهائي كأس العالم" },
+    "date": "1998-07-12",
+    "venue": { "en": "Stade de France, Saint-Denis", "ar": "ستاد دو فرانس، سان دوني" },
+    "score": "0–3",
+    "source": ["https://en.wikipedia.org/wiki/1998_FIFA_World_Cup_final"],
+    "home": {
+      "team": { "en": "Brazil", "ar": "البرازيل" },
+      "formation": "4-2-2-2",
+      "kit": { "a": "#ffdf00", "b": "#ffdf00", "num": "#0b6b3a" },
+      "rows": [
+        [{ "short": "Taffarel", "name": "Cláudio Taffarel", "ar": "تافاريل", "num": 1, "aliases": [] }],
+        [
+          { "short": "R. Carlos", "name": "Roberto Carlos", "ar": "روبرتو كارلوس", "num": 6, "aliases": ["roberto carlos", "carlos"] },
+          { "short": "J. Baiano", "name": "Júnior Baiano", "ar": "جونيور بايانو", "num": 4, "aliases": ["baiano", "junior baiano"] },
+          { "short": "Aldair", "name": "Aldair", "ar": "ألداير", "num": 3, "aliases": [] },
+          { "short": "Cafu", "name": "Cafu", "ar": "كافو", "num": 2, "aliases": [] }
+        ],
+        [
+          { "short": "Dunga", "name": "Dunga", "ar": "دونغا", "num": 8, "aliases": ["دونجا"] },
+          { "short": "C. Sampaio", "name": "César Sampaio", "ar": "سيزار سامبايو", "num": 5, "aliases": ["sampaio"] }
+        ],
+        [
+          { "short": "Leonardo", "name": "Leonardo", "ar": "ليوناردو", "num": 18, "aliases": [] },
+          { "short": "Rivaldo", "name": "Rivaldo", "ar": "ريفالدو", "num": 10, "aliases": [] }
+        ],
+        [
+          { "short": "Ronaldo", "name": "Ronaldo Nazário", "ar": "رونالدو", "num": 9, "aliases": ["r9", "fenomeno"] },
+          { "short": "Bebeto", "name": "Bebeto", "ar": "بيبيتو", "num": 20, "aliases": [] }
+        ]
+      ]
+    },
+    "away": {
+      "team": { "en": "France", "ar": "فرنسا" },
+      "formation": "4-3-2-1",
+      "kit": { "a": "#16307a", "b": "#16307a", "num": "#ffffff" },
+      "rows": [
+        [{ "short": "Barthez", "name": "Fabien Barthez", "ar": "بارتيز", "num": 16, "aliases": [] }],
+        [
+          { "short": "Lizarazu", "name": "Bixente Lizarazu", "ar": "ليزارازو", "num": 3, "aliases": [] },
+          { "short": "Desailly", "name": "Marcel Desailly", "ar": "ديسايي", "num": 8, "aliases": [] },
+          { "short": "Leboeuf", "name": "Frank Leboeuf", "ar": "لوبوف", "num": 18, "aliases": ["lebeouf"] },
+          { "short": "Thuram", "name": "Lilian Thuram", "ar": "تورام", "num": 15, "aliases": [] }
+        ],
+        [
+          { "short": "Petit", "name": "Emmanuel Petit", "ar": "بوتي", "num": 17, "aliases": [] },
+          { "short": "Deschamps", "name": "Didier Deschamps", "ar": "ديشان", "num": 7, "aliases": [] },
+          { "short": "Karembeu", "name": "Christian Karembeu", "ar": "كاريمبو", "num": 19, "aliases": [] }
+        ],
+        [
+          { "short": "Zidane", "name": "Zinedine Zidane", "ar": "زيدان", "num": 10, "aliases": ["zizou"] },
+          { "short": "Djorkaeff", "name": "Youri Djorkaeff", "ar": "جوركاييف", "num": 6, "aliases": ["djorkaef"] }
+        ],
+        [{ "short": "Guivarc'h", "name": "Stéphane Guivarc'h", "ar": "غيفارش", "num": 9, "aliases": ["guivarch"] }]
+      ]
+    }
+  },
+  {
+    "id": "bay-che-2012",
+    "comp": { "en": "Champions League Final", "ar": "نهائي دوري أبطال أوروبا" },
+    "date": "2012-05-19",
+    "venue": { "en": "Allianz Arena, Munich", "ar": "أليانز أرينا، ميونخ" },
+    "score": "1–1",
+    "note": { "en": "Chelsea won 4–3 on penalties", "ar": "فاز تشيلسي 4–3 بركلات الترجيح" },
+    "source": ["https://en.wikipedia.org/wiki/2012_UEFA_Champions_League_final"],
+    "home": {
+      "team": { "en": "Bayern Munich", "ar": "بايرن ميونخ" },
+      "formation": "4-2-3-1",
+      "kit": { "a": "#dc052d", "b": "#dc052d", "num": "#ffffff" },
+      "rows": [
+        [{ "short": "Neuer", "name": "Manuel Neuer", "ar": "نوير", "num": 1, "aliases": [] }],
+        [
+          { "short": "Contento", "name": "Diego Contento", "ar": "كونتينتو", "num": 26, "aliases": [] },
+          { "short": "Tymoshchuk", "name": "Anatoliy Tymoshchuk", "ar": "تيموشوك", "num": 44, "aliases": ["timoshchuk", "tymoschuk"] },
+          { "short": "Boateng", "name": "Jérôme Boateng", "ar": "بواتينغ", "num": 17, "aliases": ["بواتينج"] },
+          { "short": "Lahm", "name": "Philipp Lahm", "ar": "لام", "num": 21, "aliases": [] }
+        ],
+        [
+          { "short": "Schweinsteiger", "name": "Bastian Schweinsteiger", "ar": "شفاينشتايغر", "num": 31, "aliases": ["basti", "schweini"] },
+          { "short": "Kroos", "name": "Toni Kroos", "ar": "كروس", "num": 39, "aliases": [] }
+        ],
+        [
+          { "short": "Ribéry", "name": "Franck Ribéry", "ar": "ريبيري", "num": 7, "aliases": ["ribery"] },
+          { "short": "Müller", "name": "Thomas Müller", "ar": "مولر", "num": 25, "aliases": ["muller", "mueller"] },
+          { "short": "Robben", "name": "Arjen Robben", "ar": "روبن", "num": 10, "aliases": [] }
+        ],
+        [{ "short": "Gómez", "name": "Mario Gómez", "ar": "غوميز", "num": 33, "aliases": ["gomez", "جوميز"] }]
+      ]
+    },
+    "away": {
+      "team": { "en": "Chelsea", "ar": "تشيلسي" },
+      "formation": "4-2-3-1",
+      "kit": { "a": "#034694", "b": "#034694", "num": "#ffffff" },
+      "rows": [
+        [{ "short": "Čech", "name": "Petr Čech", "ar": "تشيك", "num": 1, "aliases": ["chech"] }],
+        [
+          { "short": "Cole", "name": "Ashley Cole", "ar": "كول", "num": 3, "aliases": [] },
+          { "short": "David Luiz", "name": "David Luiz", "ar": "دافيد لويز", "num": 4, "aliases": ["luiz"] },
+          { "short": "Cahill", "name": "Gary Cahill", "ar": "كاهيل", "num": 24, "aliases": [] },
+          { "short": "Bosingwa", "name": "José Bosingwa", "ar": "بوسينغوا", "num": 17, "aliases": [] }
+        ],
+        [
+          { "short": "Lampard", "name": "Frank Lampard", "ar": "لامبارد", "num": 8, "aliases": ["lamps"] },
+          { "short": "Mikel", "name": "John Obi Mikel", "ar": "ميكيل", "num": 12, "aliases": ["obi mikel", "obi"] }
+        ],
+        [
+          { "short": "Bertrand", "name": "Ryan Bertrand", "ar": "برتراند", "num": 34, "aliases": [] },
+          { "short": "Mata", "name": "Juan Mata", "ar": "ماتا", "num": 10, "aliases": [] },
+          { "short": "Kalou", "name": "Salomon Kalou", "ar": "كالو", "num": 21, "aliases": [] }
+        ],
+        [{ "short": "Drogba", "name": "Didier Drogba", "ar": "دروغبا", "num": 11, "aliases": ["دروجبا"] }]
+      ]
+    }
+  },
+  {
+    "id": "arg-fra-2022",
+    "comp": { "en": "World Cup Final", "ar": "نهائي كأس العالم" },
+    "date": "2022-12-18",
+    "venue": { "en": "Lusail Stadium, Lusail", "ar": "استاد لوسيل، لوسيل" },
+    "score": "3–3",
+    "note": { "en": "Argentina won 4–2 on penalties", "ar": "فازت الأرجنتين 4–2 بركلات الترجيح" },
+    "source": ["https://en.wikipedia.org/wiki/2022_FIFA_World_Cup_final"],
+    "home": {
+      "team": { "en": "Argentina", "ar": "الأرجنتين" },
+      "formation": "4-3-3",
+      "kit": { "a": "#75aadb", "b": "#ffffff", "stripes": true, "num": "#1b2a4a" },
+      "rows": [
+        [{ "short": "E. Martínez", "name": "Emiliano Martínez", "ar": "إيميليانو مارتينيز", "num": 23, "aliases": ["martinez", "dibu", "emi martinez", "مارتينيز"] }],
+        [
+          { "short": "Tagliafico", "name": "Nicolás Tagliafico", "ar": "تاغليافيكو", "num": 3, "aliases": [] },
+          { "short": "Otamendi", "name": "Nicolás Otamendi", "ar": "أوتاميندي", "num": 19, "aliases": [] },
+          { "short": "Romero", "name": "Cristian Romero", "ar": "روميرو", "num": 13, "aliases": ["cuti"] },
+          { "short": "Molina", "name": "Nahuel Molina", "ar": "مولينا", "num": 26, "aliases": [] }
+        ],
+        [
+          { "short": "Mac Allister", "name": "Alexis Mac Allister", "ar": "ماك أليستر", "num": 20, "aliases": ["macallister", "mac"] },
+          { "short": "Enzo", "name": "Enzo Fernández", "ar": "إنزو فرنانديز", "num": 24, "aliases": ["fernandez", "انزو"] },
+          { "short": "De Paul", "name": "Rodrigo De Paul", "ar": "دي بول", "num": 7, "aliases": ["depaul"] }
+        ],
+        [
+          { "short": "Di María", "name": "Ángel Di María", "ar": "دي ماريا", "num": 11, "aliases": ["dimaria", "fideo"] },
+          { "short": "Álvarez", "name": "Julián Álvarez", "ar": "ألفاريز", "num": 9, "aliases": ["alvarez", "araña"] },
+          { "short": "Messi", "name": "Lionel Messi", "ar": "ميسي", "num": 10, "aliases": ["leo"] }
+        ]
+      ]
+    },
+    "away": {
+      "team": { "en": "France", "ar": "فرنسا" },
+      "formation": "4-2-3-1",
+      "kit": { "a": "#1c2a4f", "b": "#1c2a4f", "num": "#ffffff" },
+      "rows": [
+        [{ "short": "Lloris", "name": "Hugo Lloris", "ar": "لوريس", "num": 1, "aliases": [] }],
+        [
+          { "short": "T. Hernández", "name": "Theo Hernández", "ar": "تيو هيرنانديز", "num": 22, "aliases": ["theo", "hernandez"] },
+          { "short": "Upamecano", "name": "Dayot Upamecano", "ar": "أوباميكانو", "num": 18, "aliases": [] },
+          { "short": "Varane", "name": "Raphaël Varane", "ar": "فاران", "num": 4, "aliases": [] },
+          { "short": "Koundé", "name": "Jules Koundé", "ar": "كوندي", "num": 5, "aliases": ["kounde"] }
+        ],
+        [
+          { "short": "Rabiot", "name": "Adrien Rabiot", "ar": "رابيو", "num": 14, "aliases": [] },
+          { "short": "Tchouaméni", "name": "Aurélien Tchouaméni", "ar": "تشواميني", "num": 8, "aliases": ["tchouameni"] }
+        ],
+        [
+          { "short": "Mbappé", "name": "Kylian Mbappé", "ar": "مبابي", "num": 10, "aliases": ["mbappe", "kylian"] },
+          { "short": "Griezmann", "name": "Antoine Griezmann", "ar": "غريزمان", "num": 7, "aliases": ["grizi", "جريزمان"] },
+          { "short": "Dembélé", "name": "Ousmane Dembélé", "ar": "ديمبيلي", "num": 11, "aliases": ["dembele"] }
+        ],
+        [{ "short": "Giroud", "name": "Olivier Giroud", "ar": "جيرو", "num": 9, "aliases": [] }]
+      ]
+    }
+  }
+]
