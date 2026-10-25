@@ -78,7 +78,7 @@ section h3,.label{font:700 1.05rem var(--cond);color:var(--ink);margin:4px 0 8px
 .players{display:flex;flex-direction:column;gap:8px}
 .prow{display:flex;gap:8px;align-items:center}
 .prow .btn{white-space:nowrap;flex:none}
-.prow .team{font-size:.9rem;color:var(--muted);white-space:nowrap;min-inline-size:6.5em}
+.prow .team{font-size:.9rem;color:var(--muted);flex:0 1 auto;max-inline-size:42%;line-height:1.25;overflow-wrap:anywhere}
 .x{inline-size:48px;block-size:48px;flex:none;border-radius:var(--r);border:1.5px solid var(--line);background:none;cursor:pointer;font-size:1.3rem;line-height:1}
 .err{color:var(--miss);margin:0;font-size:.95rem}
 
@@ -91,7 +91,8 @@ section h3,.label{font:700 1.05rem var(--cond);color:var(--ink);margin:4px 0 8px
 .board{background:var(--tag);color:var(--tag-ink);border-radius:var(--r);padding:12px 16px;display:flex;flex-direction:column;gap:6px}
 .comp{font-family:var(--cond);font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#a9bcb1;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 :root:lang(ar) .comp{letter-spacing:0}
-.score{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:1.55rem;line-height:1.05}
+.score{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:10px;font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(1.15rem,5.4vw,1.55rem);line-height:1.05}
+.score > span{overflow-wrap:anywhere}
 .score .h{text-align:end}
 .score .s{font-variant-numeric:tabular-nums;color:var(--card);padding:0 4px;white-space:nowrap}
 .score .t{color:#fff;text-decoration:underline;text-decoration-color:var(--card);text-decoration-thickness:3px;text-underline-offset:5px}
@@ -107,7 +108,7 @@ section h3,.label{font:700 1.05rem var(--cond);color:var(--ink);margin:4px 0 8px
 .turn .n{font-variant-numeric:tabular-nums;font-family:var(--cond);font-weight:700}
 
 /* Pitch: always LTR so a left-back stays on the left in Arabic. Shrinks to fit short screens. */
-.pitch{position:relative;inline-size:min(100%,calc((100dvh - 290px) * 68 / 92));min-inline-size:min(100%,260px);margin-inline:auto;aspect-ratio:68/92;border-radius:var(--r);overflow:hidden;
+.pitch{container-type:inline-size;position:relative;inline-size:min(100%,calc((100dvh - 290px) * 68 / 92));min-inline-size:min(100%,260px);margin-inline:auto;aspect-ratio:68/92;border-radius:var(--r);overflow:hidden;
   background:repeating-linear-gradient(to bottom,var(--grass) 0 7.6923%,var(--grass-2) 7.6923% 15.3846%)}
 .pitch.full{inline-size:100%}
 .pitch > svg.lines{position:absolute;inset:0;width:100%;height:100%}
@@ -118,8 +119,10 @@ section h3,.label{font:700 1.05rem var(--cond);color:var(--ink);margin:4px 0 8px
 .slot:not(:disabled):active svg{transform:scale(.94)}
 .slot:focus-visible{outline:none}
 .slot:focus-visible svg,.slot.sel svg{outline:2.5px solid var(--card);outline-offset:3px;border-radius:6px}
-.tag{font-family:var(--cond);font-weight:700;font-size:clamp(.68rem,2.7vw,.82rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.15;
-  background:var(--tag);color:var(--tag-ink);padding:2px 6px;border-radius:3px;white-space:nowrap;min-inline-size:34px;text-align:center}
+/* A tag may use only its slot's room (set per slot from the formation); long names wrap at spaces or shrink. */
+.tag{font-family:var(--cond);font-weight:700;font-size:clamp(.66rem,3cqw,.82rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.1;max-inline-size:calc(var(--room,30) * 1cqw);white-space:normal;overflow-wrap:anywhere;
+  background:var(--tag);color:var(--tag-ink);padding:2px 6px;border-radius:3px;min-inline-size:34px;text-align:center}
+.tag.long{font-size:clamp(.56rem,2.5cqw,.74rem);letter-spacing:0}
 .tag:lang(ar){font-family:"Cairo",sans-serif;letter-spacing:0}
 .tag.unknown{background:rgba(0,0,0,.4);color:rgba(255,255,255,.8);letter-spacing:.12em}
 .tag.hinted{background:var(--card);color:var(--card-ink);letter-spacing:.14em}

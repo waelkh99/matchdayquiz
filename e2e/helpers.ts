@@ -1,4 +1,11 @@
 import { expect, type Page } from '@playwright/test'
+import matches from '../src/data/matches.json' with { type: 'json' }
+
+export { matches }
+/** Left-to-right mark that starts every share-grid row. */
+export const LRM = String.fromCharCode(0x200e)
+/** How many matches involve this team (English name). */
+export const withTeam = (team: string) => matches.filter(m => m.home.team.en === team || m.away.team.en === team).length
 
 export const BARCA = ['Valdes', 'Sylvinho', 'Toure', 'Pique', 'Puyol', 'Iniesta', 'Busquets', 'Xavi', 'Henry', 'Messi', "Eto'o"]
 export const UTD = ['Van der Sar', 'Evra', 'Vidic', 'Ferdinand', "O'Shea", 'Giggs', 'Carrick', 'Anderson', 'Rooney', 'Ronaldo', 'Park']
@@ -41,7 +48,11 @@ export async function noHorizontalScroll(page: Page) {
   const { scroll, client, offenders } = await page.evaluate(() => {
     const w = document.documentElement.clientWidth
     const offenders = [...document.querySelectorAll('body *')]
-      .filter(e => { const r = e.getBoundingClientRect(); return r.right > w + 0.5 || r.left < -0.5 })
+      .filter(e => {
+        const r = e.getBoundingClientRect()
+        const textSpills = e.scrollWidth > e.clientWidth + 1 && getComputedStyle(e).overflowX === 'visible' && e.clientWidth > 0
+        return r.right > w + 0.5 || r.left < -0.5 || (textSpills && r.right + e.scrollWidth - e.clientWidth > w + 0.5)
+      })
       .slice(0, 5).map(e => `${e.tagName.toLowerCase()}.${e.className} (${Math.round(e.getBoundingClientRect().left)}..${Math.round(e.getBoundingClientRect().right)})`)
     return { scroll: document.documentElement.scrollWidth, client: w, offenders }
   })

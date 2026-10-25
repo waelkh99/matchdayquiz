@@ -63,11 +63,12 @@ describe('resolveGuess', () => {
     expect(hitName(barca, 'ميسي')).toBe('Lionel Messi')
     expect(hitName(barca, 'انيستا')).toBe('Andrés Iniesta')
     expect(hitName(barca, 'إنييستا')).toBe('Andrés Iniesta')
-    expect(hitName(barca, 'شافي')).toBe('Xavi Hernández')
+    expect(hitName(barca, 'شافي')).toBe('Xavi')
   })
   it('typo tolerance: exact under 5 chars', () => {
-    expect(hitName(barca, 'Xavi')).toBe('Xavi Hernández')
+    expect(hitName(barca, 'Xavi')).toBe('Xavi')
     expect(hitName(barca, 'Xavo')).toBe('miss')
+    expect(hitName(barca, 'Xavi Hernández')).toBe('Xavi') // old full name kept as an alias
   })
   it('typo tolerance: 1 edit for 5–7 chars', () => {
     expect(hitName(barca, 'Mesi')).toBe('Lionel Messi')
@@ -109,7 +110,7 @@ describe('slots', () => {
     const gk = barca[0]
     expect(gk.gk).toBe(true)
     expect([gk.x, gk.y]).toEqual([50, 86])
-    const top = barca.filter(s => s.row === 3)
+    const top = barca.filter(s => s.row === 4)
     expect(top.every(s => s.y === 12)).toBe(true)
     expect(top.map(s => s.x)).toEqual([12, 50, 88])
   })

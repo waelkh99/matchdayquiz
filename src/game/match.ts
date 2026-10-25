@@ -1,13 +1,14 @@
 import type { Player, Side } from '../data'
 
-export type Slot = Player & { i: number; keys: string[]; x: number; y: number; row: number; gk: boolean }
+/** x, y and room are % of the pitch; room is the width a name tag can use without hitting a neighbour or the touchline. */
+export type Slot = Player & { i: number; keys: string[]; x: number; y: number; room: number; row: number; gk: boolean }
 
 // Accents stripped, lowercased, Arabic letter variants unified, everything else dropped.
 export function norm(s: string): string {
-  return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
-    .replace(/[ً-ٰٟـ]/g, '') // tashkeel, tatweel
-    .replace(/[إأآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي')
-    .replace(/[^a-zء-ي]/g, '')
+  return s.normalize('NFD').replace(/[\u0300-\u036F]/g, '').toLowerCase()
+    .replace(/[\u064B-\u0670\u065F\u0640]/g, '') // tashkeel, tatweel
+    .replace(/[\u0625\u0623\u0622]/g, '\u0627').replace(/\u0629/g, '\u0647').replace(/\u0649/g, '\u064A') // إأآ→ا  ة→ه  ى→ي
+    .replace(/[^a-z\u0621-\u064A]/g, '')
 }
 
 export function lev(a: string, b: string): number {
@@ -34,7 +35,9 @@ export function slots(side: Side): Slot[] {
     row.forEach((p, ci) => {
       const x = row.length === 1 ? 50 : 12 + ci * (76 / (row.length - 1))
       const keys = [...new Set([p.short, p.name, p.ar ?? '', ...p.aliases].map(norm).filter(Boolean))]
-      out.push({ ...p, i: out.length, keys, x, y, row: ri, gk: ri === 0 })
+      const gap = row.length === 1 ? 100 : 76 / (row.length - 1)
+      const room = Math.min(gap, 2 * Math.min(x, 100 - x)) - 2
+      out.push({ ...p, i: out.length, keys, x, y, room, row: ri, gk: ri === 0 })
     })
   })
   return out
@@ -71,7 +74,7 @@ export function resolveGuess(all: Slot[], found: Set<number>, text: string): Gue
   return { kind: 'miss' }
 }
 
-/** Hint: first letter, then underscores, keeping spaces/dots/apostrophes. "Messi" → "M____" */
+/** Hint: first letter, then underscores, keeping spaces/dots/apostrophes. "Messi" \u2192 "M____" */
 export function pattern(s: string): string {
   return [...s].map((c, i) => (i === 0 ? c.toUpperCase() : /[\s'.-]/.test(c) ? c : '_')).join('')
 }

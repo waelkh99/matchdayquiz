@@ -3,12 +3,19 @@ import type { Match } from '../data'
 import { norm } from '../game/match'
 import { useT } from '../i18n'
 
+// Nicknames people type that aren't part of the official name.
+const AKA: Record<string, string> = {
+  'Manchester United': 'utd mufc', 'Paris Saint-Germain': 'psg', 'Tottenham Hotspur': 'spurs', Barcelona: 'barca barça',
+  'Bayern Munich': 'munchen fcb', 'Borussia Dortmund': 'bvb', 'Inter Milan': 'internazionale', Milan: 'ac milan', 'Atlético Madrid': 'atleti',
+}
+
 /** Every query word must match: digits against the year/date, anything else against teams, competition and venue in both languages. */
 export function searchMatches(all: Match[], q: string): Match[] {
   const words = q.trim().split(/\s+/).filter(Boolean)
   if (!words.length) return all
   return all.filter(m => {
-    const hay = [m.home.team, m.away.team, m.comp, m.venue].flatMap(s => [s.en, s.ar]).map(norm).join('|')
+    const hay = [m.home.team, m.away.team, m.comp, m.venue].flatMap(s => [s.en, s.ar])
+      .concat(AKA[m.home.team.en] ?? '', AKA[m.away.team.en] ?? '').map(norm).join('|')
     return words.every(w => (/^\d+$/.test(w) ? m.date.includes(w) : norm(w) !== '' && hay.includes(norm(w))))
   })
 }

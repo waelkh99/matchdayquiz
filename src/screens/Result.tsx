@@ -35,7 +35,7 @@ export function Result({ m, sh, game, onStart }: Props) {
 
   // Each line opens with a strong character of its own language so chat apps lay it out correctly;
   // grid rows get a left-to-right mark so the formation never mirrors (left-back stays left).
-  const ltrGrid = (k: SideKey) => grid(game, sh, k).replace(/^/gm, '‎')
+  const ltrGrid = (k: SideKey) => grid(game, sh, k).replace(/^/gm, '\u200E')
   const shareText = multi
     ? t.shareHead(BRAND, `${tx(m.home.team)} ${m.score} ${tx(m.away.team)} (${year})`) + '\n'
       + scores.map(s => `${s.name}: ${s.found}/11`).join('\n') + '\n\n'

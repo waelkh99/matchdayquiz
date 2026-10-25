@@ -14,7 +14,7 @@ describe('solo', () => {
     const g = play(solo(), ...BARCA)
     expect(g.done).toBe(true)
     expect(score(g, 0)).toEqual({ found: 11, hints: 0, misses: 0 })
-    expect(grid(g, sh, 'home')).toBe('🟩🟩🟩\n🟩🟩🟩\n🟩🟩🟩🟩\n🟩')
+    expect(grid(g, sh, 'home')).toBe('🟩🟩🟩\n🟩🟩\n🟩\n🟩🟩🟩🟩\n🟩') // 4-1-2-3
   })
   it('ends after 5 distinct misses; repeat misses are free', () => {
     let g = play(solo(), 'Nobody', 'nobody', 'NOBODY')
@@ -39,8 +39,8 @@ describe('solo', () => {
     expect(canHint(g, 4)).toBe(false)
     expect(hint(g, 4)).toBe(g)
     g = play(g, 'Sylvinho')
-    expect(grid(g, sh, 'home').split('\n')[3]).toBe('⬜')
-    expect(grid(g, sh, 'home').split('\n')[2]).toBe('🟨⬜⬜⬜')
+    expect(grid(g, sh, 'home').split('\n')[4]).toBe('⬜')
+    expect(grid(g, sh, 'home').split('\n')[3]).toBe('🟨⬜⬜⬜')
     expect(canHint(play(solo(), 'Valdes'), 0)).toBe(false)
   })
   it('give up ends the game', () => {

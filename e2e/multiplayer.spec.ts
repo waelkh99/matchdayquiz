@@ -90,9 +90,9 @@ test.describe('same XI', () => {
 test.describe('team vs team', () => {
   test('setup shows who plays which team, and swap works', async ({ page }) => {
     await setup(page, 'versus', ['Ahmed', 'Basel'])
-    await expect(page.locator('.prow .team')).toHaveText(['Barcelona', 'Man United'])
+    await expect(page.locator('.prow .team')).toHaveText(['Barcelona', 'Manchester United'])
     await page.getByRole('button', { name: 'Swap teams' }).click()
-    await expect(page.locator('.prow .team')).toHaveText(['Man United', 'Barcelona'])
+    await expect(page.locator('.prow .team')).toHaveText(['Manchester United', 'Barcelona'])
     await expect(page.getByRole('button', { name: '+ Add player' })).toHaveCount(0)
   })
 
@@ -103,7 +103,7 @@ test.describe('team vs team', () => {
     await guess(page, 'Messi')
     await expect(page.getByRole('heading', { name: "Basel's turn" })).toBeVisible()
     await expect(feedback(page)).toHaveText('Ahmed: Lionel Messi, #10.')
-    await expect(page.locator('.task')).toContainText("Man United's starting XI")
+    await expect(page.locator('.task')).toContainText("Manchester United's starting XI")
     await expect(found(page)).toHaveText('0/11')
     await guess(page, 'Messi') // not in United's XI
     await expect(feedback(page)).toHaveText("Basel: Messi didn't start this one.")
@@ -122,8 +122,8 @@ test.describe('team vs team', () => {
     const result = page.getByTestId('result')
     await expect(result.getByRole('heading', { level: 2 })).toHaveText('Ahmed wins')
     await expect(result.locator('.boards .pitch')).toHaveCount(2)
-    await expect(result.locator('.boards h3')).toHaveText(['Barcelona', 'Man United'])
-    await expect(page.getByTestId('share')).toContainText('Barcelona\n‎🟩🟩🟩')
-    await expect(page.getByTestId('share')).toContainText('Man United\n‎⬜⬜⬜')
+    await expect(result.locator('.boards h3')).toHaveText(['Barcelona', 'Manchester United'])
+    await expect(page.getByTestId('share')).toContainText('Barcelona\n\u200E🟩🟩🟩')
+    await expect(page.getByTestId('share')).toContainText('Manchester United\n\u200E⬜⬜⬜')
   })
 })

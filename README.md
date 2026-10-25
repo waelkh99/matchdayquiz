@@ -16,7 +16,8 @@ First e2e run: `npx playwright install chromium`.
 
 ## Where things live
 
-- `src/data/matches.json`: the lineups. `npm test` checks every XI (11 players, formation matches the rows, unique numbers, Arabic names, every alias resolves to its own player). **Verify each XI against two sources before launch.**
+- `src/data/matches.json`: the lineups (51 matches, 102 XIs, imported from Wikipedia and then reviewed). `npm test` checks every XI (11 players, formation matches the rows, unique numbers, Arabic names, every alias resolves to its own player), and `npm run e2e` renders every lineup on a 360px phone to check that the name tags fit.
+- `scripts/import-wikipedia.mjs`: adds matches. `node scripts/import-wikipedia.mjs "2010 UEFA Champions League final" "2022 FIFA World Cup knockout stage @ Morocco vs Portugal"` prints entries: starting XIs, shirt numbers, positions → formation, kit colours, venue, date, penalties/extra time, and Arabic names from Arabic Wikipedia. Then review them by hand: give each a short id and a competition, check the short names (two-word mononyms like "Roberto Carlos", players who share a surname), add striped kits and nicknames as aliases, and run the tests.
 - `src/game/`: name matching, game rules, challenge-link codec. Pure TypeScript, no React.
 - `src/i18n.tsx`: all English and Arabic copy.
 - `src/brand.ts`: the product name, for renaming.

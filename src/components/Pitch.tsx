@@ -54,7 +54,7 @@ export function Pitch({ kit, slots, board, reveal, selected = null, pop = null, 
         return (
           <button
             key={p.i} type="button" className={cls2} data-slot={p.i}
-            style={{ left: p.x + '%', top: p.y + '%', ['--i' as string]: p.i }}
+            style={{ left: p.x + '%', top: p.y + '%', ['--i' as string]: p.i, ['--room' as string]: p.room }}
             disabled={got || reveal || !onSelect}
             aria-pressed={onSelect ? selected === p.i : undefined}
             onClick={() => onSelect?.(p.i)}
@@ -66,7 +66,7 @@ export function Pitch({ kit, slots, board, reveal, selected = null, pop = null, 
             </svg>
             {/* Accessible name comes from content: "Shirt 10 Messi", "Shirt 10 unknown", "Shirt 10 hint: starts with M, 5 letters" */}
             <span className="vh">{t.shirtNo(p.num)} </span>
-            <span className={cls} aria-hidden={got || reveal ? undefined : true}>{label}</span>
+            <span className={cls + (Math.max(...label.split(/\s+/).map(w => w.length)) > 9 ? ' long' : '')} aria-hidden={got || reveal ? undefined : true}>{label}</span>
             {!got && !reveal && <span className="vh">{hinted ? t.hintA11y(name[0], [...name].filter(c => !/[\s'.-]/.test(c)).length) : t.unknown}</span>}
           </button>
         )

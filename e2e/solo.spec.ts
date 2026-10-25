@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { BARCA, feedback, found, fresh, guess, pickMatch, startSolo } from './helpers'
+import { BARCA, LRM, feedback, found, fresh, guess, matches, pickMatch, startSolo, withTeam } from './helpers'
 
 test.describe('home', () => {
   test('shows the three modes and coming-soon modes', async ({ page }) => {
@@ -35,21 +35,22 @@ test.describe('match search', () => {
   test.beforeEach(async ({ page }) => fresh(page, '#/setup/solo'))
 
   test('lists every match', async ({ page }) => {
-    await expect(page.locator('[data-match]')).toHaveCount(7)
+    await expect(page.locator('[data-match]')).toHaveCount(matches.length)
   })
   test('filters by team, year, competition, combined words, and Arabic', async ({ page }) => {
     const box = page.getByRole('searchbox', { name: 'Find a match' })
     const rows = page.locator('[data-match]')
-    await box.fill('liverpool'); await expect(rows).toHaveCount(1)
+    await box.fill('liverpool'); await expect(rows).toHaveCount(withTeam('Liverpool'))
     await box.fill('2009'); await expect(rows).toHaveCount(1)
-    await box.fill('world cup'); await expect(rows).toHaveCount(3)
+    await box.fill('world cup'); await expect(rows).toHaveCount(matches.filter(m => /world cup/i.test(m.comp.en)).length)
     await box.fill('france 1998'); await expect(rows).toHaveCount(1)
-    await box.fill('BAYERN'); await expect(rows).toHaveCount(2)
-    await box.fill('munchen'); await expect(rows).toHaveCount(0) // German spelling isn't an alias
-    await box.fill('برشلونة'); await expect(rows).toHaveCount(2) // Barça 2009 + the 1999 final at Camp Nou, Barcelona
-    await box.fill('barcelona'); await expect(rows).toHaveCount(2)
+    await box.fill('BAYERN'); await expect(rows).toHaveCount(withTeam('Bayern Munich'))
+    await box.fill('munchen'); await expect(rows).toHaveCount(withTeam('Bayern Munich')) // nickname
+    await box.fill('برشلونة'); await expect(rows).toHaveCount(withTeam('Barcelona') + 1) // + the 1999 final at Camp Nou, Barcelona
+    await box.fill('barcelona'); await expect(rows).toHaveCount(withTeam('Barcelona') + 1)
+    await box.fill('man utd'); await expect(rows).toHaveCount(withTeam('Manchester United'))
     await box.fill('xyz'); await expect(page.getByText('No matches found.')).toBeVisible()
-    await box.fill(''); await expect(rows).toHaveCount(7)
+    await box.fill(''); await expect(rows).toHaveCount(matches.length)
   })
   test('random picks a match and changes on the next tap', async ({ page }) => {
     await page.getByRole('button', { name: 'Random' }).click()
@@ -61,10 +62,12 @@ test.describe('match search', () => {
   })
   test('random respects the current search', async ({ page }) => {
     await page.getByRole('searchbox').fill('world cup')
+    const shown = await page.locator('[data-match]').evaluateAll(els => els.map(e => e.getAttribute('data-match')))
+    expect(shown.length).toBeGreaterThan(1)
     for (let i = 0; i < 5; i++) {
       await page.getByRole('button', { name: 'Random' }).click()
       const id = await page.locator('[data-match][aria-pressed="true"]').getAttribute('data-match')
-      expect(['ned-esp-2010', 'bra-fra-1998', 'arg-fra-2022']).toContain(id)
+      expect(shown).toContain(id)
     }
   })
   test('kick off without a match shows an error', async ({ page }) => {
@@ -75,10 +78,10 @@ test.describe('match search', () => {
   })
   test('team choice: underlines the chosen team and plays that side', async ({ page }) => {
     await pickMatch(page, 'bar-mun-2009')
-    await page.getByRole('button', { name: 'Man United', exact: true }).click()
-    await expect(page.getByRole('button', { name: 'Man United', exact: true })).toHaveAttribute('aria-pressed', 'true')
+    await page.getByRole('button', { name: 'Manchester United', exact: true }).click()
+    await expect(page.getByRole('button', { name: 'Manchester United', exact: true })).toHaveAttribute('aria-pressed', 'true')
     await page.getByRole('button', { name: 'Kick off' }).click()
-    await expect(page.locator('.task')).toContainText("Man United's starting XI")
+    await expect(page.locator('.task')).toContainText("Manchester United's starting XI")
     await guess(page, 'Rooney')
     await expect(feedback(page)).toHaveText('Wayne Rooney, #10.')
   })
@@ -101,7 +104,7 @@ test.describe('solo game', () => {
     await guess(page, 'titi'); await expect(feedback(page)).toHaveText('Thierry Henry, #14.')
     await guess(page, 'PIQUÉ'); await expect(feedback(page)).toHaveText('Gerard Piqué, #3.')
     await guess(page, 'Buskets'); await expect(feedback(page)).toHaveText('Sergio Busquets, #28.')
-    await guess(page, 'تشافي'); await expect(feedback(page)).toHaveText('Xavi Hernández, #6.')
+    await guess(page, 'تشافي'); await expect(feedback(page)).toHaveText('Xavi, #6.')
     await expect(found(page)).toHaveText('6/11')
     await expect(page.locator('.slot.got')).toHaveCount(6)
     await expect(page.locator('.slot.got .tag').first()).not.toHaveText('? ? ?')
@@ -130,7 +133,7 @@ test.describe('solo game', () => {
     await expect(result.getByRole('heading', { level: 2 })).toHaveText('Full house')
     await expect(result.locator('.big')).toHaveText('11/11')
     await expect(result.getByText('Every name on the sheet.')).toBeVisible()
-    await expect(page.getByTestId('share')).toHaveText('XI Guess · Barcelona 2009\n11/11 · 0 misses\n\n‎🟩🟩🟩\n‎🟩🟩🟩\n‎🟩🟩🟩🟩\n‎🟩')
+    await expect(page.getByTestId('share')).toHaveText(['XI Guess · Barcelona 2009', '11/11 · 0 misses', '', '🟩🟩🟩', '🟩🟩', '🟩', '🟩🟩🟩🟩', '🟩'].map((l, n) => (n > 2 ? LRM + l : l)).join(String.fromCharCode(10)))
     await expect(result.locator('.tag.missed')).toHaveCount(0)
     await expect(page.locator('#guess')).toHaveCount(0)
   })
@@ -173,7 +176,7 @@ test.describe('solo game', () => {
     await guess(page, 'Messi')
     await guess(page, 'zz', 'yy', 'xx', 'ww', 'vv')
     await expect(page.getByTestId('share')).toContainText('1/11 · 3 hints · 5 misses')
-    await expect(page.getByTestId('share')).toContainText('⬜🟨⬜')
+    await expect(page.getByTestId('share')).toContainText(LRM + '⬜⬜🟨') // Henry, Eto'o, Messi (hinted, then found)
   })
 
   test('selecting a shirt then finding that player clears the selection', async ({ page }) => {

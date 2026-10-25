@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { feedback, fresh, guess, noHorizontalScroll, pickMatch, startSolo } from './helpers'
+import { LRM, feedback, fresh, guess, noHorizontalScroll, pickMatch, startSolo, withTeam } from './helpers'
 
 test.describe('Arabic', () => {
   test('toggle switches to RTL Arabic and persists across reloads', async ({ page }) => {
@@ -51,16 +51,16 @@ test.describe('Arabic', () => {
     expect(lines[0]).toBe('برشلونة 2009 · XI Guess')
     expect(lines[1]).toBe('النتيجة 1/11 · أخطاء: 5')
     const grid = lines.slice(3)
-    expect(grid).toHaveLength(4)
-    for (const row of grid) expect(row.startsWith('‎')).toBe(true)
-    expect(grid[0]).toBe('‎⬜🟩⬜')
+    expect(grid).toHaveLength(5) // 4-1-2-3
+    for (const row of grid) expect(row.startsWith('\u200E')).toBe(true)
+    expect(grid[0]).toBe(LRM + '⬜⬜🟩') // Messi started on the right
   })
 
   test('Arabic setup: search in Arabic, team names in Arabic', async ({ page }) => {
     await fresh(page, '#/setup/solo')
     await page.getByRole('button', { name: 'عربي' }).click()
     await page.getByRole('searchbox').fill('ليفربول')
-    await expect(page.locator('[data-match]')).toHaveCount(1)
+    await expect(page.locator('[data-match]')).toHaveCount(withTeam('Liverpool'))
     await pickMatch(page, 'mil-liv-2005')
     await expect(page.getByRole('button', { name: 'ليفربول', exact: true })).toBeVisible()
     await expect(page.locator('.board .comp').first()).toContainText('نهائي دوري أبطال أوروبا')
