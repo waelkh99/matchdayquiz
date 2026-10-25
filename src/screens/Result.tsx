@@ -6,7 +6,6 @@ import { Pitch } from '../components/Pitch'
 import { Scoreboard } from '../components/Scoreboard'
 import { AdSlot } from '../components/AdSlot'
 import { useT } from '../i18n'
-import { store } from '../store'
 import { BRAND } from '../brand'
 
 type Props = { m: Match; sh: Sheets; game: Game; onStart: (g: Game) => void }
@@ -15,7 +14,8 @@ export function Result({ m, sh, game, onStart }: Props) {
   const { t, tx, link } = useT()
   const [copied, setCopied] = useState<'result' | 'link' | null>(null)
   const [fallback, setFallback] = useState<string | null>(null)
-  const [me, setMe] = useState(() => store.get<string>('me') ?? '')
+  // Not remembered: on a phone passed around, a saved name would sign the next person's challenge.
+  const [me, setMe] = useState('')
   const [nameErr, setNameErr] = useState(false)
 
   const multi = game.players.length > 1
@@ -52,7 +52,6 @@ export function Result({ m, sh, game, onStart }: Props) {
   function challengeLink() {
     const name = me.trim()
     if (!name) return setNameErr(true)
-    store.set('me', name)
     const code = encodeChallenge({ matchId: m.id, side: sides[0], name, found: solo.found, hints: solo.hints, misses: solo.misses })
     const url = `${location.origin}${link(`/match/${m.id}`)}?c=${code}` // the match page gives the link a proper preview
     copy(`${shareText}\n\n${t.beatMe} ${url}`, 'link')
@@ -105,7 +104,8 @@ export function Result({ m, sh, game, onStart }: Props) {
 
           {!multi && (
             <div className="field">
-              <label className="label" htmlFor="me">{t.challengeTitle}</label>
+              <h3>{t.challengeTitle}</h3>
+              <label className="sub" htmlFor="me">{t.yourNameLabel}</label>
               <div className="prow">
                 <input id="me" className="input" value={me} maxLength={24} dir="auto" placeholder={t.yourName} aria-invalid={nameErr}
                   aria-describedby={nameErr ? 'me-err' : undefined}
@@ -113,6 +113,7 @@ export function Result({ m, sh, game, onStart }: Props) {
                 <button className="btn card" type="button" onClick={challengeLink}>{copied === 'link' ? t.copied : t.challengeBtn}</button>
               </div>
               {nameErr && <p className="err" id="me-err" role="alert">{t.needYourName}</p>}
+              {me.trim() && <p className="sub" data-testid="challenge-preview">{t.friendSees(t.challengeIntro(me.trim().slice(0, 24), solo.found))}</p>}
             </div>
           )}
 

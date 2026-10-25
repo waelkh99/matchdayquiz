@@ -14,8 +14,8 @@ test.describe('challenge links', () => {
     // name is required
     await page.getByRole('button', { name: 'Copy challenge link' }).click()
     await expect(page.getByRole('alert')).toHaveText('Add your name so your friend knows who to beat.')
-    await expect(page.getByLabel('Challenge a friend')).toHaveAttribute('aria-invalid', 'true')
-    await page.getByLabel('Challenge a friend').fill('Ahmed')
+    await expect(page.getByLabel('Your name, so your friend knows who sent it')).toHaveAttribute('aria-invalid', 'true')
+    await page.getByLabel('Your name, so your friend knows who sent it').fill('Ahmed')
     await page.getByRole('button', { name: 'Copy challenge link' }).click()
     await expect(page.getByRole('button', { name: 'Copied' })).toBeVisible()
     const text = await page.evaluate(() => navigator.clipboard.readText())
@@ -37,16 +37,22 @@ test.describe('challenge links', () => {
     await friend.close()
   })
 
-  test('the sender name is remembered', async ({ page, context }) => {
+  test('the name box starts empty for every game and shows exactly what the friend will see', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write'])
     await startSolo(page)
-    await guess(page, 'a', 'b', 'c', 'd', 'e')
-    await page.getByLabel('Challenge a friend').fill('Sara')
+    await guess(page, 'Messi', 'a', 'b', 'c', 'd', 'e')
+    await expect(page.getByTestId('challenge-preview')).toHaveCount(0)
+    await page.getByLabel('Your name, so your friend knows who sent it').fill('Sara')
+    await expect(page.getByTestId('challenge-preview')).toHaveText('Your friend will see: “Sara named 1/11 of this XI. Can you beat it?”')
     await page.getByRole('button', { name: 'Copy challenge link' }).click()
+    // someone else plays next on the same phone: no name carried over
     await page.getByRole('button', { name: 'Play again' }).click()
     await guess(page, 'a', 'b', 'c', 'd', 'e')
-    await expect(page.getByLabel('Challenge a friend')).toHaveValue('Sara')
+    await expect(page.getByLabel('Your name, so your friend knows who sent it')).toHaveValue('')
+    await page.reload()
+    await expect(page.getByLabel('Your name, so your friend knows who sent it')).toHaveValue('')
   })
+
 })
 
 test('broken challenge links show an error with a way out', async ({ page }) => {
