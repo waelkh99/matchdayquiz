@@ -6,13 +6,15 @@ import { MatchPicker } from '../components/MatchPicker'
 import { Scoreboard } from '../components/Scoreboard'
 import { useT } from '../i18n'
 import { store } from '../store'
+import { useMeta } from '../useMeta'
 
 const MAX_PLAYERS = 6
 
-export function Setup({ mode, onStart }: { mode: Mode; onStart: (g: Game) => void }) {
-  const { t, tx } = useT()
+export function Setup({ mode, preselect, onStart }: { mode: Mode; preselect: string | null; onStart: (g: Game) => void }) {
+  const { t, tx, link, lang } = useT()
+  useMeta({ kind: 'setup', mode }, lang)
   const [matches, setMatches] = useState<Match[]>([])
-  const [id, setId] = useState<string | null>(null)
+  const [id, setId] = useState<string | null>(preselect)
   const [side, setSide] = useState<SideKey>('home')
   const [names, setNames] = useState<string[]>(() => {
     const saved = store.get<string[]>('names') ?? []
@@ -43,7 +45,7 @@ export function Setup({ mode, onStart }: { mode: Mode; onStart: (g: Game) => voi
     <>
       <div className="titlebar">
         <h2 className="title">{title}</h2>
-        <a className="ghost" href="#/">{t.back}</a>
+        <a className="ghost" href={link('/')}>{t.back}</a>
       </div>
 
       <MatchPicker matches={matches} value={id} onPick={x => { setId(x); setErr('') }} />

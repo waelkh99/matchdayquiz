@@ -15,12 +15,12 @@ for (const lang of ['en', 'ar'] as const) for (const scheme of ['light', 'dark']
     })
     test('home', async ({ page }) => { await page.goto('/'); await axe(page) })
     test('setup', async ({ page }) => {
-      await page.goto('/#/setup/versus')
+      await page.goto('/setup/versus')
       await pickMatch(page, 'bar-mun-2009')
       await axe(page)
     })
     test('play', async ({ page }) => {
-      await page.goto('/#/setup/solo')
+      await page.goto('/setup/solo')
       await pickMatch(page, 'bar-mun-2009')
       await page.locator('.dock .btn').click()
       await guess(page, 'Messi', 'Nobody')
@@ -28,7 +28,7 @@ for (const lang of ['en', 'ar'] as const) for (const scheme of ['light', 'dark']
       await axe(page)
     })
     test('result', async ({ page }) => {
-      await page.goto('/#/setup/solo')
+      await page.goto('/setup/solo')
       await pickMatch(page, 'bar-mun-2009')
       await page.locator('.dock .btn').click()
       await guess(page, 'Messi', 'a', 'b', 'c', 'd', 'e')
@@ -61,7 +61,7 @@ test('shirts announce their number and state', async ({ page }) => {
 })
 
 test('feedback is announced to screen readers', async ({ page }) => {
-  await fresh(page, '#/setup/solo')
+  await fresh(page, '/setup/solo')
   await pickMatch(page, 'bar-mun-2009')
   await page.getByRole('button', { name: 'Kick off' }).click()
   await expect(page.getByTestId('feedback')).toHaveAttribute('aria-live', 'polite')

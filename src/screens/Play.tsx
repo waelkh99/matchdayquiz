@@ -5,11 +5,14 @@ import { Pitch } from '../components/Pitch'
 import { Scoreboard } from '../components/Scoreboard'
 import { Result } from './Result'
 import { useT } from '../i18n'
+import { useMeta } from '../useMeta'
+import { go } from '../router'
 
 type Props = { game: Game; setGame: (g: Game | null) => void; onStart: (g: Game) => void }
 
 export function Play({ game, setGame, onStart }: Props) {
-  const { t, tx, full } = useT()
+  const { t, tx, full, link, lang } = useT()
+  useMeta({ kind: 'play' }, lang)
   const [m, setM] = useState<Match>()
   const [text, setText] = useState('')
   const [selected, setSelected] = useState<number | null>(null)
@@ -21,7 +24,7 @@ export function Play({ game, setGame, onStart }: Props) {
   useEffect(() => {
     getMatch(game.matchId).then(x => {
       if (x) setM(x)
-      else { setGame(null); location.hash = '/' } // saved game for a match that no longer exists
+      else { setGame(null); go(link('/'), { replace: true }) } // saved game for a match that no longer exists
     })
   }, [game.matchId])
   useEffect(() => { setSelected(null); setArmed(false) }, [game.turn])

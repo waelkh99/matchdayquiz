@@ -11,8 +11,8 @@ export const BARCA = ['Valdes', 'Sylvinho', 'Toure', 'Pique', 'Puyol', 'Iniesta'
 export const UTD = ['Van der Sar', 'Evra', 'Vidic', 'Ferdinand', "O'Shea", 'Giggs', 'Carrick', 'Anderson', 'Rooney', 'Ronaldo', 'Park']
 
 /** Fresh visit: empty storage, English. */
-export async function fresh(page: Page, hash = '#/') {
-  await page.goto('/' + hash)
+export async function fresh(page: Page, path = '/') {
+  await page.goto(path)
   await page.evaluate(() => { localStorage.clear(); localStorage.setItem('teamsheet:v2:lang', '"en"') })
   await page.reload()
 }
@@ -23,11 +23,11 @@ export async function pickMatch(page: Page, id: string) {
 }
 
 export async function startSolo(page: Page, id = 'bar-mun-2009', team?: string) {
-  await fresh(page, '#/setup/solo')
+  await fresh(page, '/setup/solo')
   await pickMatch(page, id)
   if (team) await page.getByRole('button', { name: team, exact: true }).click()
   await page.getByRole('button', { name: 'Kick off' }).click()
-  await expect(page).toHaveURL(/#\/play$/)
+  await expect(page).toHaveURL(/\/play$/)
 }
 
 export async function guess(page: Page, ...names: string[]) {

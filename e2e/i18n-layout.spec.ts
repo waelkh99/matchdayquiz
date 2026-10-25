@@ -4,13 +4,13 @@ import { LRM, feedback, fresh, guess, noHorizontalScroll, pickMatch, startSolo, 
 test.describe('Arabic', () => {
   test('toggle switches to RTL Arabic and persists across reloads', async ({ page }) => {
     await fresh(page)
-    await page.getByRole('button', { name: 'عربي' }).click()
+    await page.getByRole('link', { name: 'عربي' }).click()
     await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
     await expect(page.locator('html')).toHaveAttribute('lang', 'ar')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('هل تعرف التشكيلة؟')
     await page.reload()
     await expect(page.locator('html')).toHaveAttribute('dir', 'rtl')
-    await page.getByRole('button', { name: 'English' }).click()
+    await page.getByRole('link', { name: 'English' }).click()
     await expect(page.locator('html')).toHaveAttribute('dir', 'ltr')
   })
 
@@ -24,7 +24,7 @@ test.describe('Arabic', () => {
 
   test('full game in Arabic: Arabic names on shirts, Arabic guesses, pitch not mirrored', async ({ page }) => {
     await startSolo(page)
-    await page.getByRole('button', { name: 'عربي' }).click()
+    await page.getByRole('link', { name: 'عربي' }).click()
     await expect(page.locator('.task')).toContainText('برشلونة')
     await guess(page, 'ميسي')
     await expect(feedback(page)).toHaveText('ميسي، رقم 10.')
@@ -45,7 +45,7 @@ test.describe('Arabic', () => {
 
   test('Arabic share text opens each line in Arabic and keeps the grid left-to-right', async ({ page }) => {
     await startSolo(page)
-    await page.getByRole('button', { name: 'عربي' }).click()
+    await page.getByRole('link', { name: 'عربي' }).click()
     await guess(page, 'ميسي', 'aa', 'bb', 'cc', 'dd', 'ee')
     const lines = (await page.getByTestId('share').textContent())!.split('\n')
     expect(lines[0]).toBe('برشلونة 2009 · XI Guess')
@@ -57,8 +57,8 @@ test.describe('Arabic', () => {
   })
 
   test('Arabic setup: search in Arabic, team names in Arabic', async ({ page }) => {
-    await fresh(page, '#/setup/solo')
-    await page.getByRole('button', { name: 'عربي' }).click()
+    await fresh(page, '/setup/solo')
+    await page.getByRole('link', { name: 'عربي' }).click()
     await page.getByRole('searchbox').fill('ليفربول')
     await expect(page.locator('[data-match]')).toHaveCount(withTeam('Liverpool'))
     await pickMatch(page, 'mil-liv-2005')
@@ -73,11 +73,11 @@ test.describe('layout', () => {
       await page.setViewportSize({ width, height: 800 })
       await fresh(page)
       await noHorizontalScroll(page)
-      await page.goto('/#/setup/versus'); await noHorizontalScroll(page)
+      await page.goto('/setup/versus'); await noHorizontalScroll(page)
       await pickMatch(page, 'mun-bay-1999'); await noHorizontalScroll(page)
       await page.getByRole('button', { name: 'Kick off' }).click()
       await noHorizontalScroll(page)
-      await page.getByRole('button', { name: 'عربي' }).click()
+      await page.getByRole('link', { name: 'عربي' }).click()
       await noHorizontalScroll(page)
     })
   }
@@ -107,13 +107,13 @@ test.describe('layout', () => {
 
   test('kick off stays reachable on a long setup page', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 })
-    await fresh(page, '#/setup/same')
+    await fresh(page, '/setup/same')
     await expect(page.getByRole('button', { name: 'Kick off' })).toBeInViewport()
   })
 
   test('touch targets are at least 44px tall', async ({ page }) => {
     await startSolo(page)
-    for (const sel of ['#guess', '.dock .btn', 'button.lang', '.tools .ghost']) {
+    for (const sel of ['#guess', '.dock .btn', '.lang', '.tools .ghost']) {
       for (const box of await page.locator(sel).evaluateAll(els => els.map(e => e.getBoundingClientRect().height)))
         expect(box, sel).toBeGreaterThanOrEqual(40)
     }
@@ -155,7 +155,7 @@ test.describe('preferences', () => {
       const fail = () => { throw new Error('blocked') }
       Object.defineProperty(window, 'localStorage', { get: fail })
     })
-    await page.goto('/#/setup/solo')
+    await page.goto('/setup/solo')
     await pickMatch(page, 'bar-mun-2009')
     await page.getByRole('button', { name: 'Kick off' }).click()
     await guess(page, 'Messi')

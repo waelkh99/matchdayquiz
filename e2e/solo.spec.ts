@@ -8,9 +8,9 @@ test.describe('home', () => {
     const nav = page.getByRole('navigation', { name: 'Game modes' })
     await expect(nav.getByRole('link')).toHaveCount(3)
     await nav.getByRole('link', { name: /Solo/ }).click()
-    await expect(page).toHaveURL(/#\/setup\/solo$/)
+    await expect(page).toHaveURL(/\/setup\/solo$/)
     await page.getByRole('link', { name: 'Back' }).click()
-    await expect(page).toHaveURL(/#\/$/)
+    await expect(page).toHaveURL(new URL('/', page.url()).href)
     await expect(page.getByText('Career path')).toBeVisible()
     await expect(page.locator('.fixture.soon')).toHaveCount(2)
   })
@@ -24,15 +24,15 @@ test.describe('home', () => {
   })
 
   test('unknown routes fall back to home', async ({ page }) => {
-    await fresh(page, '#/nope/123')
+    await fresh(page, '/nope/123')
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-    await page.goto('/#/play') // no saved game
+    await page.goto('/play') // no saved game
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   })
 })
 
 test.describe('match search', () => {
-  test.beforeEach(async ({ page }) => fresh(page, '#/setup/solo'))
+  test.beforeEach(async ({ page }) => fresh(page, '/setup/solo'))
 
   test('lists every match', async ({ page }) => {
     await expect(page.locator('[data-match]')).toHaveCount(matches.length)
@@ -212,7 +212,7 @@ test.describe('solo game', () => {
     await page.reload()
     await expect(found(page)).toHaveText('1/11')
     await expect(page.getByTestId('misses')).toHaveAttribute('data-used', '1')
-    await page.goto('/#/')
+    await page.goto('/')
     await page.getByRole('link', { name: 'Continue your game' }).click()
     await expect(found(page)).toHaveText('1/11')
   })
@@ -220,8 +220,7 @@ test.describe('solo game', () => {
   test('a corrupted or outdated saved game recovers instead of a blank screen', async ({ page }) => {
     await fresh(page)
     await page.evaluate(() => localStorage.setItem('teamsheet:v2:game', JSON.stringify({ matchId: 'bar-mun-2009', mode: 'solo', players: [], boards: {}, turn: 0, done: false })))
-    await page.goto('/#/play')
-    await page.reload() // a hash-only goto doesn't reload, and the saved game is read at startup
+    await page.goto('/play') // a real page load: the saved game is read at startup
     await page.getByRole('link', { name: /Something went wrong/ }).click()
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     expect(await page.evaluate(() => localStorage.getItem('teamsheet:v2:game'))).toBeNull()

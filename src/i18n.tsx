@@ -1,103 +1,22 @@
-import { createContext, useContext, useState, type ReactNode } from 'react'
+import { createContext, useContext, type ReactNode } from 'react'
 import type { L10n, Player } from './data'
 import { store } from './store'
+import { go, localize, splitLang, useUrl } from './router'
+import { en as enText, ar as arText } from './strings'
 
 export type Lang = 'en' | 'ar'
 
+
 const en = {
-  heroTitle: 'Can you name the XI?', modesLabel: 'Game modes',
-  tagline: 'Famous matches, eleven blank shirts. Play alone or pass the phone around.',
-  countSolo: '1 player', countSame: '2–6 players', countVersus: '2 players',
-  modeSolo: 'Solo', modeSoloDesc: 'Pick any match, or a random one, and name the XI.',
-  modeSame: 'Same XI', modeSameDesc: 'Pass the phone. Take turns on one lineup; every name you get is a point.',
-  modeVersus: 'Team vs team', modeVersusDesc: 'Two players, one match. You take one side, your friend takes the other.',
-  more: 'More modes', career: 'Career path', basket: 'Basketball five', soon: 'Soon',
-  resume: 'Continue your game',
-  back: 'Back',
-  findMatch: 'Find a match', searchPh: 'Team, final or year', noResults: 'No matches found.', random: 'Random',
-  pickTeam: 'Which team?', players: 'Players', addPlayer: 'Add player', removePlayer: 'Remove player',
-  playerN: (n: number) => `Player ${n}`, swap: 'Swap teams',
-  start: 'Kick off', needMatch: 'Pick a match first.', needNames: 'Every player needs a different name.',
-  guessLabel: 'Player name', guessPh: "Type a player's name", guessBtn: 'Guess',
-  guessPhFor: (name: string) => `${name}, type a name`,
-  intro: 'Surnames are enough. Accents and small typos are fine.',
-  found: 'Found', misses: 'Misses', hints: 'Hints',
-  hintFor: (n: number) => `Hint for #${n}`, tapShirt: 'Tap a shirt for a hint', noHints: 'No hints left',
-  giveUp: 'Give up', confirmGiveUp: 'Tap again to reveal the XI', retire: 'Retire', confirmRetire: 'Tap again to retire',
-  turnOf: (name: string) => `${name}'s turn`,
-  byPlayer: (name: string, msg: string) => `${name}: ${msg}`,
+  ...enText,
   task: (team: ReactNode, formation: string) => <>Name <b>{team}</b>'s starting XI · {formation}</>,
-  fbHit: (name: string, num: number) => `${name}, #${num}.`,
-  fbAlready: (name: string) => `${name} is already on the sheet.`,
-  fbMiss: (t: string) => `${t} didn't start this one.`,
-  fbRepeat: (t: string) => `${t} was already tried.`,
-  fbHint: (n: number) => `Hint used on #${n}.`,
-  notInXI: 'Not in this XI:',
-  shirtNo: (num: number) => `Shirt ${num}`, unknown: 'unknown',
-  hintA11y: (first: string, n: number) => `hint: starts with ${first.toUpperCase()}, ${n} letters`,
-  darkMode: 'Dark mode',
-  v11: 'Full house', v9: 'Proper fan', v6: 'Decent shift', v3: 'Bench warmer', v0: 'Back to the archive',
-  gaveUp: 'You gave up.', missedShown: 'The players you missed are shown in white.', allFound: 'Every name on the sheet.',
-  copy: 'Copy result', copied: 'Copied', share: 'Share', copyFail: "Copy didn't work here. Select the text below and copy it.",
-  playAgain: 'Play again', newGame: 'New game',
-  wins: (name: string) => `${name} wins`, youWin: 'You win', draw: "It's a draw",
-  shareHead: (brand: string, what: string) => `${brand} · ${what}`,
-  summary: (found: number, hints: number, misses: number) =>
-    `${found}/11${hints ? ` · ${hints} hint${hints > 1 ? 's' : ''}` : ''} · ${misses} miss${misses === 1 ? '' : 'es'}`,
-  challengeTitle: 'Challenge a friend', yourName: 'Your name', challengeBtn: 'Copy challenge link',
-  needYourName: 'Add your name so your friend knows who to beat.',
-  beatMe: 'Beat my score:',
-  challengeIntro: (name: string, n: number) => `${name} named ${n}/11 of this XI. Can you beat it?`,
-  accept: 'Take the challenge', you: 'You', badLink: 'This challenge link is broken or out of date.',
 }
 
 export type Strings = typeof en
 
 const ar: Strings = {
-  heroTitle: 'هل تعرف التشكيلة؟', modesLabel: 'أنماط اللعب',
-  tagline: 'مباريات تاريخية وأحد عشر قميصًا بلا أسماء. العب وحدك أو مرّر الجوال لأصدقائك.',
-  countSolo: 'لاعب واحد', countSame: '2–6 لاعبين', countVersus: 'لاعبان',
-  modeSolo: 'فردي', modeSoloDesc: 'اختر أي مباراة، أو مباراة عشوائية، وسمِّ التشكيلة.',
-  modeSame: 'نفس التشكيلة', modeSameDesc: 'مرّروا الجوال. تبادلوا الأدوار على تشكيلة واحدة؛ كل اسم صحيح نقطة.',
-  modeVersus: 'فريق ضد فريق', modeVersusDesc: 'لاعبان ومباراة واحدة. أنت تأخذ فريقًا وصديقك يأخذ الآخر.',
-  more: 'أنماط أخرى', career: 'المسيرة', basket: 'خماسي السلة', soon: 'قريبًا',
-  resume: 'أكمل مباراتك',
-  back: 'رجوع',
-  findMatch: 'ابحث عن مباراة', searchPh: 'فريق أو سنة', noResults: 'لا توجد مباريات.', random: 'عشوائية',
-  pickTeam: 'أي فريق؟', players: 'اللاعبون', addPlayer: 'أضف لاعبًا', removePlayer: 'احذف اللاعب',
-  playerN: (n: number) => `لاعب ${n}`, swap: 'بدّل الفريقين',
-  start: 'ابدأ', needMatch: 'اختر مباراة أولًا.', needNames: 'كل لاعب يحتاج اسمًا مختلفًا.',
-  guessLabel: 'اسم اللاعب', guessPh: 'اكتب اسم لاعب', guessBtn: 'خمّن',
-  guessPhFor: (name: string) => `${name}، اكتب اسمًا`,
-  intro: 'اسم العائلة يكفي. الأخطاء الإملائية البسيطة مقبولة.',
-  found: 'تم', misses: 'أخطاء', hints: 'تلميحات',
-  hintFor: (n: number) => `تلميح للرقم ${n}`, tapShirt: 'اضغط على قميص للتلميح', noHints: 'لا تلميحات متبقية',
-  giveUp: 'استسلم', confirmGiveUp: 'اضغط مرة أخرى لكشف التشكيلة', retire: 'انسحب', confirmRetire: 'اضغط مرة أخرى للانسحاب',
-  turnOf: (name: string) => `دور ${name}`,
-  byPlayer: (name: string, msg: string) => `${name}: ${msg}`,
+  ...arText,
   task: (team: ReactNode, formation: string) => <>سمِّ التشكيلة الأساسية لـ<b>{team}</b> · <bdi>{formation}</bdi></>,
-  fbHit: (name: string, num: number) => `${name}، رقم ${num}.`,
-  fbAlready: (name: string) => `${name} موجود في التشكيلة.`,
-  fbMiss: (t: string) => `${t} لم يكن أساسيًا في هذه المباراة.`,
-  fbRepeat: (t: string) => `${t} تمت تجربته من قبل.`,
-  fbHint: (n: number) => `استُخدم تلميح على الرقم ${n}.`,
-  notInXI: 'ليسوا في التشكيلة:',
-  shirtNo: (num: number) => `القميص ${num}`, unknown: 'مجهول',
-  hintA11y: (first: string, n: number) => `تلميح: يبدأ بحرف ${first}، ${n} أحرف`,
-  darkMode: 'الوضع الداكن',
-  v11: 'التشكيلة كاملة', v9: 'مشجع حقيقي', v6: 'أداء محترم', v3: 'دكة البدلاء', v0: 'ارجع للأرشيف',
-  gaveUp: 'استسلمت.', missedShown: 'اللاعبون الذين فاتوك باللون الأبيض.', allFound: 'كل الأسماء في التشكيلة.',
-  copy: 'انسخ النتيجة', copied: 'تم النسخ', share: 'شارك', copyFail: 'لم ينجح النسخ هنا. حدد النص بالأسفل وانسخه.',
-  playAgain: 'العب مجددًا', newGame: 'مباراة جديدة',
-  wins: (name: string) => `الفوز لـ${name}`, youWin: 'فزت!', draw: 'تعادل',
-  shareHead: (brand: string, what: string) => `${what} · ${brand}`,
-  summary: (found: number, hints: number, misses: number) =>
-    `النتيجة ${found}/11${hints ? ` · تلميحات: ${hints}` : ''} · أخطاء: ${misses}`,
-  challengeTitle: 'تحدَّ صديقًا', yourName: 'اسمك', challengeBtn: 'انسخ رابط التحدي',
-  needYourName: 'أضف اسمك ليعرف صديقك من يتحدى.',
-  beatMe: 'اهزم نتيجتي:',
-  challengeIntro: (name: string, n: number) => `${name} عرف ${n}/11 من هذه التشكيلة. هل تستطيع التفوق؟`,
-  accept: 'اقبل التحدي', you: 'أنت', badLink: 'رابط التحدي غير صالح أو قديم.',
 }
 
 const strings = { en, ar }
@@ -105,21 +24,25 @@ const strings = { en, ar }
 type Ctx = { lang: Lang; t: Strings; setLang: (l: Lang) => void }
 const LangCtx = createContext<Ctx>({ lang: 'en', t: en, setLang: () => {} })
 
-function apply(l: Lang): Lang {
+function apply(l: Lang) {
   document.documentElement.lang = l
   document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr'
-  return l
 }
 
-function initial(): Lang {
+/** Before the first render: on an English URL, follow a saved choice, else an Arabic browser. Explicit /ar links are never overridden. */
+export function redirectToPreferredLang() {
   const saved = store.get<Lang>('lang')
-  if (saved === 'en' || saved === 'ar') return apply(saved)
-  return apply(navigator.language?.startsWith('ar') ? 'ar' : 'en')
+  const want = saved === 'en' || saved === 'ar' ? saved : navigator.language?.startsWith('ar') ? 'ar' : 'en'
+  const { lang, path } = splitLang(location.pathname)
+  if (lang === 'en' && want === 'ar') history.replaceState(null, '', localize('ar', path) + location.search)
 }
 
+/** The URL decides the language ('/ar/...' is Arabic), so shared links and search results open in the right one. */
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(initial)
-  const setLang = (l: Lang) => { store.set('lang', l); setLangState(apply(l)) }
+  const { pathname, search } = useUrl()
+  const { lang, path } = splitLang(pathname)
+  apply(lang)
+  const setLang = (l: Lang) => { store.set('lang', l); go(localize(l, path) + search) }
   return <LangCtx.Provider value={{ lang, t: strings[lang], setLang }}>{children}</LangCtx.Provider>
 }
 
@@ -128,6 +51,8 @@ export function useT() {
   return {
     lang, t, setLang,
     tx: (s: L10n) => s[lang],
+    /** An app path in the current language: link('/matches') → '/ar/matches' in Arabic. */
+    link: (path: string) => localize(lang, path),
     /** Name on the shirt tag. */
     short: (p: Player) => (lang === 'ar' ? p.ar ?? p.short : p.short),
     /** Full name in feedback lines. */

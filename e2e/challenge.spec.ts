@@ -20,7 +20,7 @@ test.describe('challenge links', () => {
     await expect(page.getByRole('button', { name: 'Copied' })).toBeVisible()
     const text = await page.evaluate(() => navigator.clipboard.readText())
     expect(text).toContain('9/11 · 5 misses')
-    const url = text.match(/https?:\/\/\S+#\/c\/[A-Za-z0-9_-]+/)?.[0]
+    const url = text.match(/https?:\/\/\S+\/match\/bar-mun-2009\?c=[A-Za-z0-9_-]+/)?.[0]
     expect(url).toBeTruthy()
 
     // the friend, in a fresh browser
@@ -28,7 +28,7 @@ test.describe('challenge links', () => {
     const p2 = await friend.newPage()
     await p2.goto(url!)
     await expect(p2.getByTestId('challenge-intro')).toHaveText('Ahmed named 9/11 of this XI. Can you beat it?')
-    await expect(p2.locator('.task')).toContainText("Barcelona's starting XI")
+    await expect(p2.locator('.score .t')).toHaveText('Barcelona') // the challenged side is underlined
     await p2.getByRole('button', { name: 'Take the challenge' }).click()
     await guess(p2, ...BARCA)
     await expect(p2.getByTestId('challenge-outcome')).toHaveText('You win')
@@ -50,21 +50,21 @@ test.describe('challenge links', () => {
 })
 
 test('broken challenge links show an error with a way out', async ({ page }) => {
-  await fresh(page, '#/c/not-a-real-code')
+  await fresh(page, '/c/not-a-real-code')
   await expect(page.getByRole('alert')).toHaveText('This challenge link is broken or out of date.')
   await page.getByRole('link', { name: 'New game' }).click()
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
 })
 
 test('challenge for a match that does not exist is rejected', async ({ page }) => {
-  await fresh(page, '#/c/' + code(['gone-1900', 'home', 'A', 5, 0, 0]))
-  await expect(page.getByRole('alert')).toHaveText('This challenge link is broken or out of date.')
+  await fresh(page, '/c/' + code(['gone-1900', 'home', 'A', 5, 0, 0]))
+  await expect(page.getByRole('alert')).toHaveText("That match isn't in the list.")
 })
 
 test('challenger names are rendered as text, not HTML', async ({ page }) => {
   let dialog = false
   page.on('dialog', d => { dialog = true; d.dismiss() })
-  await fresh(page, '#/c/' + code(['bar-mun-2009', 'home', '<img src=x onerror=alert(1)>', 5, 0, 0]))
+  await fresh(page, '/c/' + code(['bar-mun-2009', 'home', '<img src=x onerror=alert(1)>', 5, 0, 0]))
   await expect(page.getByTestId('challenge-intro')).toContainText('<img src=x')
   await expect(page.locator('img')).toHaveCount(0)
   expect(dialog).toBe(false)

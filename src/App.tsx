@@ -6,19 +6,10 @@ import { BRAND, BRAND_SPLIT } from './brand'
 import { Home } from './screens/Home'
 import { Setup } from './screens/Setup'
 import { Play } from './screens/Play'
-import { ChallengeLanding } from './screens/ChallengeLanding'
-
-export const go = (path: string) => { location.hash = path }
-
-function useHash() {
-  const [hash, setHash] = useState(location.hash)
-  useEffect(() => {
-    const on = () => { setHash(location.hash); window.scrollTo(0, 0) }
-    addEventListener('hashchange', on)
-    return () => removeEventListener('hashchange', on)
-  }, [])
-  return hash.replace(/^#\/?/, '')
-}
+import { MatchPage } from './screens/MatchPage'
+import { Matches } from './screens/Matches'
+import { decodeChallenge } from './game/challenge'
+import { go, splitLang, useUrl } from './router'
 
 /** A saved game from an older version (or corrupted storage) must not brick the app: drop it and recover. */
 class Recover extends Component<{ children: ReactNode; onError: () => void }, { failed: boolean }> {
@@ -27,7 +18,7 @@ class Recover extends Component<{ children: ReactNode; onError: () => void }, { 
   componentDidCatch() { this.props.onError() }
   render() {
     if (!this.state.failed) return this.props.children
-    return <a className="btn wide" href="#/" onClick={() => this.setState({ failed: false })}>{RECOVER_LABEL[document.documentElement.lang === 'ar' ? 'ar' : 'en']}</a>
+    return <a className="btn wide" href={document.documentElement.lang === 'ar' ? '/ar' : '/'} onClick={() => this.setState({ failed: false })}>{RECOVER_LABEL[document.documentElement.lang === 'ar' ? 'ar' : 'en']}</a>
   }
 }
 const RECOVER_LABEL = { en: 'Something went wrong with that game. Start a new one', ar: 'حدث خطأ في هذه المباراة. ابدأ مباراة جديدة' }
@@ -63,30 +54,45 @@ function ThemeToggle() {
   )
 }
 
+function Redirect({ to }: { to: string }) {
+  useEffect(() => go(to, { replace: true }), [to])
+  return null
+}
+
 function Shell() {
-  const { lang, setLang } = useT()
-  const route = useHash()
+  const { t, lang, setLang, link } = useT()
+  const { pathname, search } = useUrl()
+  const { path } = splitLang(pathname)
   const [game, setGameState] = useState<Game | null>(() => store.get<Game>('game'))
   const setGame = (g: Game | null) => { store.set('game', g ?? undefined); setGameState(g) }
-  const start = (g: Game) => { setGame(g); go('/play') }
+  const start = (g: Game) => { setGame(g); go(link('/play')) }
 
-  const [screen, arg] = route.split('/')
+  const [, screen, arg] = path.split('/')
+  const query = new URLSearchParams(search)
   let page
-  if (screen === 'setup' && ['solo', 'same', 'versus'].includes(arg)) page = <Setup mode={arg as Mode} onStart={start} />
+  if (screen === 'setup' && ['solo', 'same', 'versus'].includes(arg)) page = <Setup mode={arg as Mode} preselect={query.get('m')} onStart={start} />
   else if (screen === 'play' && game) page = <Play game={game} setGame={setGame} onStart={start} />
-  else if (screen === 'c' && arg) page = <ChallengeLanding code={arg} onStart={start} />
-  else page = <Home resume={game && !game.done ? game : null} />
+  else if (screen === 'match' && arg) page = <MatchPage id={arg} challenge={query.get('c')} onStart={start} />
+  else if (screen === 'matches' && !arg) page = <Matches />
+  else if (screen === 'c' && arg) {
+    // Challenge links from before /match/<id>?c=… pages existed
+    const c = decodeChallenge(arg)
+    page = c
+      ? <Redirect to={link(`/match/${c.matchId}?c=${encodeURIComponent(arg)}`)} />
+      : <><p className="err" role="alert">{t.badLink}</p><a className="btn wide" href={link('/')}>{t.newGame}</a></>
+  } else page = <Home resume={game && !game.done ? game : null} />
 
+  const other = lang === 'en' ? 'ar' : 'en'
   return (
     <div className="wrap">
       <header>
-        <a className="brand" href="#/">{BRAND.slice(0, BRAND_SPLIT)}<span>{BRAND.slice(BRAND_SPLIT)}</span></a>
+        <a className="brand" href={link('/')}>{BRAND.slice(0, BRAND_SPLIT)}<span>{BRAND.slice(BRAND_SPLIT)}</span></a>
         <ThemeToggle />
-        {lang === 'en'
-          ? <button type="button" className="lang" lang="ar" onClick={() => setLang('ar')}>عربي</button>
-          : <button type="button" className="lang" lang="en" onClick={() => setLang('en')}>English</button>}
+        {/* A real link, so crawlers find the other language too */}
+        <a className="lang" lang={other} hrefLang={other} href={(other === 'ar' ? '/ar' + (path === '/' ? '' : path) : path) + search}
+          onClick={e => { e.preventDefault(); setLang(other) }}>{other === 'ar' ? 'عربي' : 'English'}</a>
       </header>
-      <Recover key={route} onError={() => setGame(null)}>{page}</Recover>
+      <Recover key={pathname} onError={() => setGame(null)}>{page}</Recover>
     </div>
   )
 }

@@ -21,7 +21,7 @@ test.describe('every lineup fits on a small phone', () => {
             boards: { home: { found: {}, hinted: [] }, away: { found: {}, hinted: [] } },
           }))
         }, [m.id, lang])
-        await page.goto('/#/play')
+        await page.goto('/play')
         await page.reload()
         const pitches = page.locator('.boards .pitch')
         await expect(pitches).toHaveCount(2)

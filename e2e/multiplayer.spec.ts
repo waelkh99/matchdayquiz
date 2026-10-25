@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test'
 import { BARCA, UTD, feedback, found, fresh, guess, pickMatch } from './helpers'
 
 async function setup(page: Page, mode: 'same' | 'versus', names: string[], id = 'bar-mun-2009') {
-  await fresh(page, `#/setup/${mode}`)
+  await fresh(page, `/setup/${mode}`)
   await pickMatch(page, id)
   for (let i = 2; i < names.length; i++) await page.getByRole('button', { name: '+ Add player' }).click()
   for (const [i, n] of names.entries()) await page.getByRole('textbox', { name: `Player ${i + 1}` }).fill(n)
@@ -12,7 +12,7 @@ const chip = (page: Page, name: string) => page.locator('.turn', { hasText: name
 
 test.describe('same XI', () => {
   test('setup: add/remove players up to 6, minimum 2', async ({ page }) => {
-    await fresh(page, '#/setup/same')
+    await fresh(page, '/setup/same')
     await expect(page.getByRole('textbox', { name: /Player \d/ })).toHaveCount(2)
     await expect(page.getByRole('button', { name: 'Remove player' })).toHaveCount(0)
     for (let i = 0; i < 4; i++) await page.getByRole('button', { name: '+ Add player' }).click()
@@ -81,7 +81,7 @@ test.describe('same XI', () => {
   test('saved names are offered next time', async ({ page }) => {
     await setup(page, 'same', ['Ahmed', 'Basel', 'Sara'])
     await page.getByRole('button', { name: 'Kick off' }).click()
-    await page.goto('/#/setup/same')
+    await page.goto('/setup/same')
     await expect(page.getByRole('textbox', { name: /Player \d/ })).toHaveCount(3)
     await expect(page.getByRole('textbox', { name: 'Player 3' })).toHaveValue('Sara')
   })

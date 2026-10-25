@@ -12,7 +12,7 @@ import { BRAND } from '../brand'
 type Props = { m: Match; sh: Sheets; game: Game; onStart: (g: Game) => void }
 
 export function Result({ m, sh, game, onStart }: Props) {
-  const { t, tx } = useT()
+  const { t, tx, link } = useT()
   const [copied, setCopied] = useState<'result' | 'link' | null>(null)
   const [fallback, setFallback] = useState<string | null>(null)
   const [me, setMe] = useState(() => store.get<string>('me') ?? '')
@@ -54,7 +54,7 @@ export function Result({ m, sh, game, onStart }: Props) {
     if (!name) return setNameErr(true)
     store.set('me', name)
     const code = encodeChallenge({ matchId: m.id, side: sides[0], name, found: solo.found, hints: solo.hints, misses: solo.misses })
-    const url = `${location.origin}${location.pathname}#/c/${code}`
+    const url = `${location.origin}${link(`/match/${m.id}`)}?c=${code}` // the match page gives the link a proper preview
     copy(`${shareText}\n\n${t.beatMe} ${url}`, 'link')
   }
   const again = () => onStart(newGame(m.id, game.mode, game.players.map(p => ({ name: p.name, side: p.side })), ch))
@@ -126,7 +126,7 @@ export function Result({ m, sh, game, onStart }: Props) {
 
         <div className="tools">
           <button className="btn" type="button" onClick={again}>{t.playAgain}</button>
-          <a className="ghost" href="#/">{t.newGame}</a>
+          <a className="ghost" href={link('/')}>{t.newGame}</a>
         </div>
       </div>
       <AdSlot slot="result" />
