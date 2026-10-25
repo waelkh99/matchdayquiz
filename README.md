@@ -11,6 +11,7 @@ npm install
 npm run dev        # http://localhost:5173
 npm test           # unit tests (matching, game rules, data integrity, challenge links)
 npm run e2e        # Playwright: builds, serves, runs every flow on a phone and a desktop viewport
+BASE_URL=https://matchdayquiz.com npm run e2e   # the same suite against the live site, after a deploy
 npm run build      # static site in dist/ (deploy to Cloudflare Pages, Vercel, etc.)
 ```
 
