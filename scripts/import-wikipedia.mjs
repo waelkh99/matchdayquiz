@@ -4,7 +4,7 @@
 // Arabic names come from each article's Arabic Wikipedia counterpart (langlinks).
 // Output still needs a human check: formations are inferred from position codes.
 
-const UA = { 'User-Agent': 'XIGuess-content-import/1.0 (lineup quiz; contact via repo)' }
+const UA = { 'User-Agent': 'MatchdayQuiz-content-import/1.0 (lineup quiz; contact via repo)' }
 const API = 'https://en.wikipedia.org/w/api.php'
 
 const raw = async (title, tries = 5) => {

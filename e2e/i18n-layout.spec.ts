@@ -48,7 +48,7 @@ test.describe('Arabic', () => {
     await page.getByRole('link', { name: 'عربي' }).click()
     await guess(page, 'ميسي', 'aa', 'bb', 'cc', 'dd', 'ee')
     const lines = (await page.getByTestId('share').textContent())!.split('\n')
-    expect(lines[0]).toBe('برشلونة 2009 · XI Guess')
+    expect(lines[0]).toBe('برشلونة 2009 · Matchday Quiz')
     expect(lines[1]).toBe('النتيجة 1/11 · أخطاء: 5')
     const grid = lines.slice(3)
     expect(grid).toHaveLength(5) // 4-1-2-3

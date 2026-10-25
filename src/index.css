@@ -1,7 +1,7 @@
 /* Matchday palette: pitch green, referee's yellow, red card, TV-scoreboard black. Logical properties throughout so Arabic mirrors. */
 :root{
   --bg:#e7ebe6; --surface:#f6f8f4; --ink:#0f1d17; --muted:#56665e; --line:#cdd5cf;
-  --card:#f2c230; --card-ink:#1d1704; --good:#1a7a42; --miss:#a8291d;
+  --card:#f2c230; --card-ink:#1d1704; --good:#15693a; --miss:#a8291d;
   --grass:#2f7a43; --grass-2:#2a7140; --chalk:rgba(255,255,255,.55); --tag:#0e1a14; --tag-ink:#f4f7f2;
   --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
   --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -38,6 +38,8 @@ header .brand{margin-inline-end:auto;min-inline-size:0}
 .theme svg{inline-size:20px;block-size:20px}
 h1.hero,h1.title,h2.title{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.95;margin:0;text-wrap:balance}
 h1.hero{font-size:clamp(2.6rem,12vw,3.6rem)}
+/* Which game this is, above its title (more games will sit beside it) */
+.game{margin:0 0 -8px;font:700 1rem var(--cond);color:var(--good)}
 h1.title,h2.title{font-size:1.8rem}
 :root:lang(ar) h1.hero,:root:lang(ar) h1.title,:root:lang(ar) h2.title{line-height:1.25}
 .sub{color:var(--muted);margin:0}
@@ -124,7 +126,7 @@ section h3,.label{font:700 1.05rem var(--cond);color:var(--ink);margin:4px 0 8px
   background:var(--tag);color:var(--tag-ink);padding:2px 6px;border-radius:3px;min-inline-size:34px;text-align:center}
 .tag.long{font-size:clamp(.56rem,2.5cqw,.74rem);letter-spacing:0}
 .tag:lang(ar){font-family:"Cairo",sans-serif;letter-spacing:0}
-.tag.unknown{background:rgba(0,0,0,.4);color:rgba(255,255,255,.8);letter-spacing:.12em}
+.tag.unknown{white-space:nowrap;background:rgba(0,0,0,.4);color:rgba(255,255,255,.8);letter-spacing:.12em}
 .tag.hinted{background:var(--card);color:var(--card-ink);letter-spacing:.14em}
 .tag.missed{background:rgba(255,255,255,.9);color:#5a2a22;font-style:italic}
 .tag.missed:lang(ar){font-style:normal;text-decoration:underline dotted;text-underline-offset:3px}

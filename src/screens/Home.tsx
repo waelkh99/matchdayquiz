@@ -26,6 +26,7 @@ export function Home({ resume }: { resume: Game | null }) {
 
   return (
     <>
+      <p className="game">{t.gameXI}</p>
       <h1 className="hero">{t.heroTitle}</h1>
       <p className="sub">{t.tagline}</p>
       <div className="heropitch">{side && sl && <Pitch kit={side.kit} slots={sl} board={EMPTY} reveal={false} full decorative />}</div>
@@ -43,7 +44,7 @@ export function Home({ resume }: { resume: Game | null }) {
         <h3>{t.more}</h3>
         <div className="fixtures">
           <div className="fixture soon" aria-disabled="true"><b>{t.career}</b><em className="count">{t.soon}</em></div>
-          <div className="fixture soon" aria-disabled="true"><b>{t.basket}</b><em className="count">{t.soon}</em></div>
+          <div className="fixture soon" aria-disabled="true"><b>{t.whoAmI}</b><em className="count">{t.soon}</em></div>
         </div>
       </section>
       <AdSlot slot="home" />

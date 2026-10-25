@@ -1,4 +1,6 @@
-# XI Guess
+# Matchday Quiz
+
+Football guessing games. The first one is **Starting XI**; more games join under the same brand and domain.
 
 Name the starting XI of famous football matches. Play solo, pass the phone around (Same XI, or Team vs team), or send a friend a challenge link. English and Arabic (RTL), light and dark mode.
 

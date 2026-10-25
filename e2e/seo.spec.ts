@@ -2,7 +2,7 @@ import { expect, test, type APIRequestContext } from '@playwright/test'
 import { fresh, matches } from './helpers'
 
 // These read the raw HTML the server sends: what crawlers and link previews (which don't run JavaScript) see.
-const SITE = 'https://xiguess.com'
+const SITE = 'https://matchdayquiz.com'
 const raw = async (request: APIRequestContext, path: string) => {
   const r = await request.get(path)
   expect(r.status(), path).toBe(200)
@@ -96,7 +96,7 @@ test.describe('in the app', () => {
     await fresh(page)
     await page.getByRole('link', { name: 'Browse all matches' }).click()
     await expect(page).toHaveURL(/\/matches$/)
-    await expect(page).toHaveTitle('All matches · XI Guess')
+    await expect(page).toHaveTitle('All matches · Matchday Quiz')
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', SITE + '/matches')
     await page.locator('a[href="/match/bar-mun-2009"]').first().click()
     await expect(page).toHaveTitle(/^Barcelona 2–0 Manchester United/)

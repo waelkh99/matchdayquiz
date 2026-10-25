@@ -64,7 +64,7 @@ function body(page: Page, lang: Lang, path: string) {
   let main = ''
   switch (page.kind) {
     case 'home':
-      main = `<h1 class="hero">${esc(t.heroTitle)}</h1><p class="sub">${esc(t.tagline)}</p>`
+      main = `<p class="game">${esc(t.gameXI)}</p><h1 class="hero">${esc(t.heroTitle)}</h1><p class="sub">${esc(t.tagline)}</p>`
         + `<nav class="fixtures">${(['solo', 'same', 'versus'] as const).map(k => {
           const [name, desc] = k === 'solo' ? [t.modeSolo, t.modeSoloDesc] : k === 'same' ? [t.modeSame, t.modeSameDesc] : [t.modeVersus, t.modeVersusDesc]
           return `<a class="fixture" href="${prefix(lang, `/setup/${k}`)}"><b>${esc(name)}</b><span>${esc(desc)}</span></a>`
