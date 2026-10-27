@@ -5,3 +5,6 @@ _flutter_old
 .playwright-mcp
 test-results
 playwright-report
+.cloudflare-token
+.env
+.env.*
